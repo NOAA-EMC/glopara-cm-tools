@@ -1,0 +1,49 @@
+#! /usr/bin/bash
+
+# Perform an rsync in parallel with 4 processes on an arbitrary source directory or set of source directories arbitrary destination directory.
+# Usage: multisync <sources> <destination>
+# Example: multisync /path/to/source/* /path/to/destination/
+# Note: The source directory must end with a trailing slash to sync the contents of the directory.
+
+if [ "$#" -lt 2 ]; then
+  echo "Usage: $0 <source1> [<source2> ...] <destination>"
+  exit 1
+fi
+DEST="${!#}"  # Get the last argument as destination
+SOURCES=("${@:1:$#-1}")  # Get all arguments except the last as sources
+NUM_PROCESSES=4  # Number of parallel processes
+
+# Function to perform rsync for a single source
+# $1: source directory(ies)
+# $2: destination directory
+rsync_single() {
+  local SRC="$1"
+  local DEST="$2"
+
+  # Perform rsync archiving so only new files are sent/updated
+  rsync -avhr "$SRC" "$DEST" &
+
+  # Wait for the process to finish
+  wait || exit 1
+}
+
+# Export the function for use in parallel
+export -f rsync_single
+export DEST
+export NUM_PROCESSES
+# Loop through sources and start rsync processes in parallel
+for INDEX in "${!SOURCES[@]}"; do
+  SRC="${SOURCES[$INDEX]}"
+  rsync_single "$SRC" "$DEST" &
+
+  # Limit the number of concurrent processes
+  if (( (INDEX + 1) % NUM_PROCESSES == 0 )); then
+    wait
+  fi
+done
+
+# Wait for any remaining processes to finish
+wait
+# Clean up temporary directory
+echo "All rsync operations completed."
+exit 0
