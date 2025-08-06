@@ -1,0 +1,39 @@
+#######################
+#SHELL=/bin/bash -l
+
+############################################################################
+# ROCOTO 4 CI
+# ######################
+# # DISABLED; all CI should be run manually on WCOSS2
+# #*/5 * * * * /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.sh > /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.log 2>&1
+#
+# ############################################################################
+# # Data syncs - syndat & verif
+# ######################
+# 0 22 * * * /lfs/h2/emc/global/noscrub/emc.global/scripts/DATA/submit_sync_data.sh > /lfs/h2/emc/stmp/emc.global/submit_sync_data.log 2>&1
+#
+# ############################################################################
+# #### GLOBAL DUMP ARCHIVE ####
+# #MAILTO="kate.friedman@noaa.gov"
+# MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov"
+#
+#
+# ######################
+# # Main GDA job
+# ######################
+# */15 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/global/noscrub/emc.global/dump_archive/gda/gda.db -w /lfs/h2/emc/global/noscrub/emc.global/dump_archive/gda/gda.xml
+#
+# ######################
+# # Monitoring script
+# ######################
+# # Main dump
+# 45 * * * * /lfs/h2/emc/global/noscrub/emc.global/dump_archive/MONITOR/monitor_filecounts.sh > /lfs/h2/emc/stmp/emc.global/gda/logs/monitor_filecounts.log 2>&1
+# ###########################################################################
+#
+# #################################
+# # GFSv17 Retro Test Experiements
+# #################################
+# # POC: Jessica Meixner, Cathy Thomas and Ruiyu Sun
+# #################### retrotestgfs01 ####################
+# MAILTO="jessica.meixner@noaa.gov"
+# #*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.db -w /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.xml
