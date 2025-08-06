@@ -1,0 +1,82 @@
+#!/bin/ksh -x
+
+########## config.base ##########
+# Common to all steps
+
+echo "BEGIN: config.base"
+
+# Machine environment
+export machine="WCOSS2"
+
+# EMC parallel or NCO production
+export RUN_ENVIR="emc"
+
+# Account, queue, etc.
+export ACCOUNT="GFS-DEV"
+export QUEUE="dev"
+export QUEUE_SERVICE="dev_transfer"
+export PARTITION_BATCH=""
+
+# Project to use in mass store:
+HPSS_PROJECT=emc-global
+
+########################################################################
+
+# GLOBAL static environment parameters
+export PACKAGEROOT="${PACKAGEROOT:-"/lfs/h1/ops/prod/packages"}"
+export COMROOT="${COMROOT:-"/lfs/h1/ops/prod/com"}"
+#OLD#export DMPDIR="/lfs/h2/emc/global/noscrub/emc.global/dump"
+export DMPDIR="/lfs/h2/emc/dump/noscrub/dump"
+
+# USER specific paths
+export HOMEDIR="/lfs/h2/emc/global/noscrub/$USER"
+export STMP="/lfs/h2/emc/stmp/$USER"
+export PTMP="/lfs/h2/emc/ptmp/$USER"
+export NOSCRUB="/lfs/h2/emc/global/noscrub/$USER"
+
+# Base directories for various builds
+export BASE_GIT="/lfs/h2/emc/global/save/emc.global/git"
+
+# CONVENIENT utility scripts and other environment parameters
+export NCP="/bin/cp -p"
+export NMV="/bin/mv"
+export NLN="/bin/ln -sf"
+export NLL='ls -l'
+export VERBOSE="YES"
+export KEEPDATA="NO"
+export CHGRP_RSTPROD="YES"
+export CHGRP_CMD="chgrp rstprod"
+
+# Machine environment, jobs, and other utility scripts
+export BASE_ENV="$HOMEgfs/env"
+export BASE_JOB="$HOMEgfs/jobs/rocoto"
+
+# EXPERIMENT specific environment parameters
+export SDATE=${SDATE:-2022052500}
+export FDATE=2022052506
+export EDATE=2027010100
+export PSLOT="gda"
+export EXPDIR="/lfs/h2/emc/global/noscrub/emc.global/dump_archive/$PSLOT"
+export ROTDIR="/lfs/h2/emc/ptmp/$USER/$PSLOT"
+export DUMP_SUFFIX=""
+export RUNDIR="$STMP/RUNDIRS/$PSLOT"
+export DATAROOT="$RUNDIR/$CDATE/$CDUMP"
+export ARCDIR="$NOSCRUB/archive/$PSLOT"
+export ATARDIR="/NCEPDEV/$HPSS_PROJECT/1year/$USER/$machine/scratch/$PSLOT"
+
+# Commonly defined parameters in JJOBS
+export envir=${envir:-"prod"}
+export NET="gfs"
+export RUN=${RUN:-${CDUMP:-"gfs"}}
+
+export ERRSCRIPT=${ERRSCRIPT:-'eval [[ $err = 0 ]]'}
+export LOGSCRIPT=${LOGSCRIPT:-""}
+export REDOUT="1>"
+export REDERR="2>"
+
+# Archiving options
+export HPSSARCH="YES" # save data to HPSS archive
+
+export DELETE_COM_IN_ARCHIVE_JOB="YES"   # NO=retain ROTDIR.  YES default in arch.sh and earc.sh.
+
+echo "END: config.base"

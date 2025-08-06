@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!DOCTYPE workflow [
+
+  <!ENTITY gfs_ver "v16.3.25">
+  <!ENTITY gfs_ver_com "v16.3">
+  <!ENTITY obsproc_ver "v1.2">
+  <!ENTITY rtofs_ver "v2.5">
+
+  <!ENTITY PSLOT "gda">
+  <!ENTITY HOMEgda "/lfs/h2/emc/global/noscrub/emc.global/dump_archive">
+  <!ENTITY HOMEgdaUTILS "&HOMEgda;/UTILS">
+  <!ENTITY HOMEgfs "/lfs/h1/ops/prod/packages/gfs.&gfs_ver;">
+  <!ENTITY EXPDIR "&HOMEgda;/&PSLOT;">
+  <!ENTITY COM "/lfs/h2/emc/ptmp/emc.global/gda">
+  <!ENTITY COMGFS "/lfs/h1/ops/prod/com/gfs/&gfs_ver_com;">
+  <!ENTITY COMOBS "/lfs/h1/ops/prod/com/obsproc/&obsproc_ver;">
+  <!ENTITY COMRTOFS "/lfs/h1/ops/prod/com/rtofs/&rtofs_ver;">
+  <!ENTITY DATAROOT "/lfs/h2/emc/stmp/emc.global/RUNDIRS/gda">
+  <!ENTITY LOG_DIR "&COM;/logs">
+
+  <!ENTITY QUEUE "dev">
+  <!ENTITY QUEUESERV "dev_transfer">
+  <!ENTITY PROJ "GFS-DEV">
+
+  <!ENTITY SCHEDULER "pbspro">
+  <!ENTITY TASK_THROTTLE "10">
+  <!ENTITY CYCLE_THROTTLE "4">
+  <!ENTITY MAX_TRIES "2">
+  
+]>
+<workflow realtime="F" cyclethrottle="&CYCLE_THROTTLE;" scheduler="&SCHEDULER;" taskthrottle="&TASK_THROTTLE;">
+
+  <log><cyclestr>&EXPDIR;/logs/@Y@m@d@H.log</cyclestr></log>
+  <cycledef group="gfs">202306180000 202701010000 06:00:00</cycledef>
+  <cycledef group="gdas">202306180000 202701010000 06:00:00</cycledef>
+  <cycledef group="rtofs">202306181200 202701011200 24:00:00</cycledef>
+  <cycledef group="rsync">202306181200 202701011200 06:00:00</cycledef>
+  <cycledef group="arch">202306181800 202701011800 24:00:00</cycledef>
+  <cycledef>202306200000 202701011800 06:00:00</cycledef>
+
+  <task name="gda.gfs" maxtries="2" cycledefs="gfs">
+        <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive ; module list ; source $EXPDIR/config.base ; source $EXPDIR/config.dumparch ; $EXPDIR/dump.sh'</command>
+        <queue>&QUEUESERV;</queue>
+        <account>&PROJ;</account>
+        <jobname>gda.gfs_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_gfs.log</cyclestr></join>
+
+        <walltime>06:00:00</walltime>
+        <nodes>1:ppn=1:tpp=1</nodes>
+
+        <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>CDUMP</name><value>gfs</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>job</name><value>dump_archive_gfs_<cyclestr>@H</cyclestr></value></envar>
+        <envar><name>DATA</name><value>&DATAROOT;/dump_archive_gfs_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+        
+        <dependency>
+          <and>
+            <datadep><cyclestr>&COMOBS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.updated.status.tm00.bufr_d</cyclestr></datadep>
+            <datadep><cyclestr>&COMGFS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.seaice.5min.blend.grb</cyclestr></datadep>
+            <datadep><cyclestr>&COMGFS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.snogrb_t1534.3072.1536</cyclestr></datadep>
+            <datadep><cyclestr>&COMGFS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.syndata.tcvitals.tm00</cyclestr></datadep>
+          </and>
+        </dependency>
+  </task>
+
+  <task name="gda.gdas" maxtries="2" cycledefs="gdas">
+        <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive ; module list ; source $EXPDIR/config.base ; source $EXPDIR/config.dumparch ; $EXPDIR/dump.sh'</command>
+        <queue>&QUEUESERV;</queue>
+        <account>&PROJ;</account>
+        <jobname>gda.gdas_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_gdas.log</cyclestr></join>
+        
+        <walltime>06:00:00</walltime>
+        <nodes>1:ppn=1:tpp=1</nodes>
+
+        <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>CDUMP</name><value>gdas</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>job</name><value>dump_archive_gdas_<cyclestr>@H</cyclestr></value></envar>
+        <envar><name>DATA</name><value>&DATAROOT;/dump_archive_gdas_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+        
+        <dependency>
+          <and>
+            <datadep><cyclestr>&COMOBS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.updated.status.tm00.bufr_d</cyclestr></datadep>
+            <datadep><cyclestr>&COMGFS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.seaice.5min.blend.grb</cyclestr></datadep>
+            <datadep><cyclestr>&COMGFS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.snogrb_t1534.3072.1536</cyclestr></datadep>
+            <datadep><cyclestr>&COMGFS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.syndata.tcvitals.tm00</cyclestr></datadep>
+          </and>
+        </dependency>
+  </task>
+
+  <task name="gda.rtofs" maxtries="2" cycledefs="rtofs">
+        <command><cyclestr>sh -c '&EXPDIR;/archive.sh -c @Y@m@d@H -l rtofs'</cyclestr></command>
+        <queue>&QUEUESERV;</queue>
+        <account>&PROJ;</account>
+        <jobname>gda.rtofs_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_rtofs.log</cyclestr></join>
+
+        <walltime>06:00:00</walltime>
+        <nodes>1:ppn=1:tpp=1</nodes>
+
+        <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>CDUMP</name><value>rtofs</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>job</name><value>dump_archive_rtofs_<cyclestr>@H</cyclestr></value></envar>
+        <envar><name>DATA</name><value>&DATAROOT;/dump_archive_rtofs_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+
+        <dependency>
+          <and>
+            <datadep><cyclestr>&COMRTOFS;/rtofs.@Y@m@d/rtofs_glo_2ds_f138_prog.nc</cyclestr></datadep>
+            <datadep><cyclestr>&COMRTOFS;/rtofs.@Y@m@d/rtofs_glo_2ds_f141_prog.nc</cyclestr></datadep>
+            <datadep><cyclestr>&COMRTOFS;/rtofs.@Y@m@d/rtofs_glo_2ds_f192_prog.nc</cyclestr></datadep>
+          </and>
+        </dependency>
+  </task>
+
+  <task name="gda.rsync" maxtries="2" cycledefs="rsync">
+        <command><cyclestr>sh -c '&HOMEgdaUTILS;/rsync.sh -m all'</cyclestr></command>
+        <queue>&QUEUESERV;</queue>
+        <account>&PROJ;</account>
+        <jobname>gda.rsync_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_rsync.log</cyclestr></join>
+        
+        <walltime>06:00:00</walltime>
+        <nodes>1:ppn=1:tpp=1</nodes>
+
+        <envar><name>SDATE</name><value><cyclestr offset="-96:00:00">@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>EDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>job</name><value>dump_archive_rsync_<cyclestr>@H</cyclestr></value></envar>
+        <envar><name>DATA</name><value>&DATAROOT;/dump_archive_rsync_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+        <envar><name>NFREQ</name><value>24</value></envar>
+        
+        <dependency>
+          <and>
+             <taskdep task="gda.gfs"/>
+             <taskdep task="gda.gdas"/>
+          </and>
+        </dependency>
+  </task>
+
+  <task name="gda.arch" maxtries="2" cycledefs="arch">
+        <command><cyclestr>sh -c '&HOMEgdaUTILS;/arch_sup.sh @Y@m@d00'</cyclestr></command>
+        <queue>&QUEUESERV;</queue>
+        <account>&PROJ;</account>
+        <jobname>gda.arch_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_arch.log</cyclestr></join>
+
+        <walltime>06:00:00</walltime>
+        <nodes>1:ppn=1:tpp=1</nodes>
+
+        <dependency>
+          <and>
+             <taskdep task="gda.gfs"/>
+             <taskdep task="gda.gdas"/>
+          </and>
+        </dependency>
+  </task>
+
+</workflow>
