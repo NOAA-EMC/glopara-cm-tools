@@ -31,9 +31,10 @@ MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov"
 ###########################################################################
 
 #################################
-# GFSv17 Retro Test Experiements
+# GFSv17 Retro Test Experiements 
 #################################
 # POC: Jessica Meixner, Cathy Thomas and Ruiyu Sun
 #################### retrotestgfs01 ####################
 MAILTO="jessica.meixner@noaa.gov"
 #*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.db -w /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.xml
+#################################################################
