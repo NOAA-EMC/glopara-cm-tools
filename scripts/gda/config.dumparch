@@ -31,7 +31,7 @@ export USER=${USER:-emc.global}
 
 #export gfs_ver=`grep "^  edit gfs_ver" /lfs/h1/ops/prod/com/ecflow/defs/prod.def | awk '{print $3}' | sed "s/'//g"`
 #export gfs_ver=${gfs_ver:-"v16.3.17"}
-export gfs_ver="v16.3.25"
+export gfs_ver="v16.3.26"
 
 # Set GDA paths
 #OLD#export DMPDIR="/lfs/h2/emc/global/noscrub/emc.global/dump"
