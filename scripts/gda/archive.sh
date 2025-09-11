@@ -395,8 +395,8 @@ do
         efile=PRCP_CU_GAUGE_V1.0GLB_0.125deg.lnx.${CPCPDY}.RT${CPCSUF}
         idir=$DCOMROOT/${CPCPDY}/wgrbbul/cpc_rcdas
         #GDA copy
-        if [ -d $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ]; then
-            mkdir $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}
+        if [[ ! -d "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}" ]]; then
+            mkdir -p "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}"
         fi
         $DMPCPCMD $idir/$ifile $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}/$ifile
         #GDAp copy
@@ -405,8 +405,8 @@ do
         #Early copy at 12z
         if [ $cyc = "12" ]; then
           #GDA early copy
-          if [ -d $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ]; then
-            mkdir $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}
+          if [[ ! -d $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ]]; then
+            mkdir -p $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}
           fi
           $DMPCPCMD $idir/$ifile $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}/$efile
           #GDAp copy
@@ -422,7 +422,7 @@ do
     # Wait till files available in /com (10z-16z)
       module load nco/$nco_ver
       COMIN=$(compath.py rtofs/${rtofs_ver})
-      if [ ! -d $odir/rtofs.$PDY ]; then mkdir $odir/rtofs.$PDY ; fi
+      if [ ! -d $odir/rtofs.$PDY ]; then mkdir -p $odir/rtofs.$PDY ; fi
       cd $odir/rtofs.$PDY
       $DMPCPCMD $COMIN/rtofs.$PDY/rtofs_glo_2ds_f00{0..9}_prog.nc ./
       $DMPCPCMD $COMIN/rtofs.$PDY/rtofs_glo_2ds_f0{1..7}?_prog.nc ./
