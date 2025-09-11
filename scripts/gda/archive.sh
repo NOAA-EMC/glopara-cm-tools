@@ -255,7 +255,6 @@ do
        pickup $DATE nr gpsipw y $CDUMP y y $idir $odir
        pickup $DATE nr gpsro y $CDUMP y y $idir $odir
        pickup $DATE nr sfcshp y $CDUMP y y $idir $odir
-       pickup $DATE nr saphir y $CDUMP y y $idir $odir
       fi
      done
     ;;
