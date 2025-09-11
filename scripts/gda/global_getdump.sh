@@ -72,7 +72,7 @@ cyctz=${cyctz:-t$(echo $CDATE|cut -c9-10)z}
 
 send_email () {
  # Check if mailfile exists and is non-zero size, then mail it
- if [[ -z "${mailfile+0}" ]]; then
+ if [[ -z "${mailfile+x}" ]]; then
    echo "FATAL ERROR: No mailfile provided to send_email, exiting..."
    exit 1
  fi
