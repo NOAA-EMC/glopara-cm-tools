@@ -405,8 +405,8 @@ do
         #Early copy at 12z
         if [ $cyc = "12" ]; then
           #GDA early copy
-          if [[ ! -d $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ]]; then
-            mkdir -p $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}
+          if [[ ! -d "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}" ]]; then
+            mkdir -p "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}"
           fi
           $DMPCPCMD $idir/$ifile $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}/$efile
           #GDAp copy
