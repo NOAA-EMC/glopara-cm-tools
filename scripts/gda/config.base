@@ -61,22 +61,14 @@ export ROTDIR="/lfs/h2/emc/ptmp/$USER/$PSLOT"
 export DUMP_SUFFIX=""
 export RUNDIR="$STMP/RUNDIRS/$PSLOT"
 export DATAROOT="$RUNDIR/$CDATE/$CDUMP"
-export ARCDIR="$NOSCRUB/archive/$PSLOT"
-export ATARDIR="/NCEPDEV/$HPSS_PROJECT/1year/$USER/$machine/scratch/$PSLOT"
 
 # Commonly defined parameters in JJOBS
 export envir=${envir:-"prod"}
 export NET="gfs"
 export RUN=${RUN:-${CDUMP:-"gfs"}}
 
-export ERRSCRIPT=${ERRSCRIPT:-'eval [[ $err = 0 ]]'}
-export LOGSCRIPT=${LOGSCRIPT:-""}
-export REDOUT="1>"
-export REDERR="2>"
-
-# Archiving options
-export HPSSARCH="YES" # save data to HPSS archive
-
-export DELETE_COM_IN_ARCHIVE_JOB="YES"   # NO=retain ROTDIR.  YES default in arch.sh and earc.sh.
+# Email notification
+export maillist="david.huber@noaa.gov"
+export do_mail="YES"
 
 echo "END: config.base"
