@@ -93,7 +93,7 @@ send_email () {
  fi
 
  if [[ -s "${mailfile}" ]]; then
-   export subject="GDA Dump Archive job recorded warning/errors"
+   subject="GDA Dump Archive job recorded warning/errors"
    # mail to $maillist, a comma-separated list of email addresses
    cat ${mailfile} | mail -s "$subject" $maillist
  fi

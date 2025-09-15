@@ -78,7 +78,7 @@ send_email () {
  fi
 
  if [[ -s "${mailfile}" ]]; then
-   export subject="global_getdump.sh recorded warning/errors"
+   subject="global_getdump.sh recorded warning/errors"
    # mail to $maillist, a comma-separated list of email addresses
    cat ${mailfile} | mail -s "$subject" $maillist
  fi
