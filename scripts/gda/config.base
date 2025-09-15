@@ -25,7 +25,6 @@ HPSS_PROJECT=emc-global
 # GLOBAL static environment parameters
 export PACKAGEROOT="${PACKAGEROOT:-"/lfs/h1/ops/prod/packages"}"
 export COMROOT="${COMROOT:-"/lfs/h1/ops/prod/com"}"
-#OLD#export DMPDIR="/lfs/h2/emc/global/noscrub/emc.global/dump"
 export DMPDIR="/lfs/h2/emc/dump/noscrub/dump"
 
 # USER specific paths

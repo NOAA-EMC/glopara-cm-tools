@@ -29,18 +29,13 @@ fi
 # Set account
 export USER=${USER:-emc.global}
 
-#export gfs_ver=`grep "^  edit gfs_ver" /lfs/h1/ops/prod/com/ecflow/defs/prod.def | awk '{print $3}' | sed "s/'//g"`
-#export gfs_ver=${gfs_ver:-"v16.3.17"}
 export gfs_ver="v16.3.26"
 
 # Set GDA paths
-#OLD#export DMPDIR="/lfs/h2/emc/global/noscrub/emc.global/dump"
 export DMPDIR="/lfs/h2/emc/dump/noscrub/dump"
-#export HOMEgfs="/lfs/h2/emc/global/noscrub/emc.global/dump_archive/feature-ops-wcoss2"
 export HOMEgfs=${HOMEgfs:-"/lfs/h1/ops/prod/packages/gfs.${gfs_ver}"}
 export HOMEgda=${HOMEgda:-"/lfs/h2/emc/global/noscrub/emc.global/dump_archive"}
 export EXPDIR=${EXPDIR:-${HOMEgda}/gda}
-#export DUMPSH=$HOMEgfs/jobs/rocoto/dump.sh
 export DUMPSH=$EXPDIR/dump.sh
 export SUPSH=$EXPDIR/archive.sh
 export UTILDIR=$HOMEgda/UTILS
@@ -48,10 +43,6 @@ export MONDIR=$HOMEgda/MONITOR
 export WEBDIR=/home/www/emc/htdocs/gmb/emc.glopara/DUMP/monitor_wcoss2
 
 # DFS paths
-#DFSWRTDIR="/dfs/write/emc/global/emc.global/dump"
-#DFSWRTDIR2="/dfs/write/emc/global/emc.global/dump2"
-#DFSREADDIR="/dfs/read/emc/global/emc.global/dump"
-#DFSREADDIR2="/dfs/read/emc/global/emc.global/dump2"
 
 # Source versions file for runtime
 source "$HOMEgfs/versions/run.ver"
@@ -69,13 +60,10 @@ export tsleep=60       #seconds to sleep before checking dump again
 export msleep=360      #maximum number of times to sleep
 export zsleep=960      #seconds to sleep after dump alert is found
 export nsleep=0
-#export SUP_BACK=72
 export SUP_BACK=0
 
 #export DALERT="YES"
 export DALERT="NO"
-#export DMPCPCMD="rsync -azvpl"
-#export DMPCPCMD="rsync -azvp"
 export DMPCPCMD="rsync -azvp --checksum"
 export DMPSUP="YES"
 export DMPTRAN="YES"
@@ -101,23 +89,13 @@ export COMOBSTMP=$COMROOT/obsproc/${obsproc_ver}/$CDUMP.\$day/\$cyc/\$COMPONENT/
 # If DALERT=YES dump.sh will look for dump_alert_flag.tm00
 export alertf="dump_alert_flag.tm00"
 
-#B4-obsproc/v1.2#export DFILES_RSTPROD="adpsfc.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d saphir.tm00.bufr_d sfcshp.tm00.bufr_d nsstbufr prepbufr prepbufr.acft_profiles"
 export DFILES_RSTPROD="adpsfc.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d sfcshp.tm00.bufr_d nsstbufr prepbufr prepbufr.acft_profiles"
 
-#B4-v16.3#export DFILES="dump_alert_flag.tm00 1bamua.tm00.bufr_d 1bhrs4.tm00.bufr_d 1bmhs.tm00.bufr_d adpsfc.tm00.bufr_d adpupa.tm00.bufr_d ahicsr.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d airsev.tm00.bufr_d ascatt.tm00.bufr_d ascatw.tm00.bufr_d atms.tm00.bufr_d atmsdb.tm00.bufr_d avcsam.tm00.bufr_d avcspm.tm00.bufr_d bathy.tm00.bufr_d crsfdb.tm00.bufr_d crisf4.tm00.bufr_d engicegrb esamua.tm00.bufr_d esatms.tm00.bufr_d eshrs3.tm00.bufr_d esiasi.tm00.bufr_d esmhs.tm00.bufr_d geoimr.tm00.bufr_d gome.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d gsrasr.tm00.bufr_d gsrcsr.tm00.bufr_d hdob.tm00.bufr_d iasidb.tm00.bufr_d imssnow96.grib2 mtiasi.tm00.bufr_d NPR.SNWN.SP.S1200.MESH16.grb NPR.SNWS.SP.S1200.MESH16.grb nsstbufr omi.tm00.bufr_d ompslp.tm00.bufr_d ompsn8.tm00.bufr_d ompst8.tm00.bufr_d osbuv8.tm00.bufr_d prepbufr prepbufr.acft_profiles proflr.tm00.bufr_d rassda.tm00.bufr_d rtgssthr.grb rtgssthr.grib2 saphir.tm00.bufr_d satwnd.tm00.bufr_d seaice.5min.grb seaice.5min.grib2 sevasr.tm00.bufr_d sevcsr.tm00.bufr_d sfcshp.tm00.bufr_d ssmisu.tm00.bufr_d sstvcw.tm00.bufr_d sstvpw.tm00.bufr_d status.tm00.bufr_d tesac.tm00.bufr_d tideg.tm00.bufr_d trkob.tm00.bufr_d updated.status.tm00.bufr_d vadwnd.tm00.bufr_d"
-#B4-obsproc/v1.2#export DFILES="dump_alert_flag.tm00 1bamua.tm00.bufr_d 1bhrs4.tm00.bufr_d 1bmhs.tm00.bufr_d adpsfc.tm00.bufr_d adpupa.tm00.bufr_d ahicsr.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d airsev.tm00.bufr_d amsr2.tm00.bufr_d ascatt.tm00.bufr_d ascatw.tm00.bufr_d atms.tm00.bufr_d atmsdb.tm00.bufr_d avcsam.tm00.bufr_d avcspm.tm00.bufr_d bathy.tm00.bufr_d crsfdb.tm00.bufr_d crisf4.tm00.bufr_d engicegrb esamua.tm00.bufr_d esatms.tm00.bufr_d eshrs3.tm00.bufr_d esiasi.tm00.bufr_d esmhs.tm00.bufr_d geoimr.tm00.bufr_d gmi1cr.tm00.bufr_d gome.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d gsrasr.tm00.bufr_d gsrcsr.tm00.bufr_d hdob.tm00.bufr_d iasidb.tm00.bufr_d imssnow96.asc imssnow96.grib2 mtiasi.tm00.bufr_d NPR.SNWN.SP.S1200.MESH16.grb NPR.SNWS.SP.S1200.MESH16.grb nsstbufr omi.tm00.bufr_d ompslp.tm00.bufr_d ompsn8.tm00.bufr_d ompst8.tm00.bufr_d osbuv8.tm00.bufr_d prepbufr prepbufr.acft_profiles proflr.tm00.bufr_d rassda.tm00.bufr_d rtgssthr.grb rtgssthr.grib2 saldrn.tm00.bufr_d saphir.tm00.bufr_d satwnd.tm00.bufr_d seaice.5min.grb seaice.5min.grib2 sevasr.tm00.bufr_d sevcsr.tm00.bufr_d sfcshp.tm00.bufr_d snocvr.tm00.bufr_d ssmisu.tm00.bufr_d sstvcw.tm00.bufr_d sstvpw.tm00.bufr_d status.tm00.bufr_d subpfl.tm00.bufr_d tesac.tm00.bufr_d tideg.tm00.bufr_d trkob.tm00.bufr_d updated.status.tm00.bufr_d vadwnd.tm00.bufr_d"
-#B4-obsproc/v1.2.4#export DFILES="dump_alert_flag.tm00 1bamua.tm00.bufr_d 1bhrs4.tm00.bufr_d 1bmhs.tm00.bufr_d adpsfc.tm00.bufr_d adpupa.tm00.bufr_d ahicsr.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d airsev.tm00.bufr_d amsr2.tm00.bufr_d ascatt.tm00.bufr_d ascatw.tm00.bufr_d atms.tm00.bufr_d atmsdb.tm00.bufr_d avcsam.tm00.bufr_d avcspm.tm00.bufr_d bathy.tm00.bufr_d crsfdb.tm00.bufr_d crisf4.tm00.bufr_d engicegrb esamua.tm00.bufr_d esatms.tm00.bufr_d eshrs3.tm00.bufr_d esiasi.tm00.bufr_d esmhs.tm00.bufr_d geoimr.tm00.bufr_d gmi1cr.tm00.bufr_d gome.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d gsrasr.tm00.bufr_d gsrcsr.tm00.bufr_d hdob.tm00.bufr_d iasidb.tm00.bufr_d imssnow96.asc imssnow96.grib2 mtiasi.tm00.bufr_d NPR.SNWN.SP.S1200.MESH16.grb NPR.SNWS.SP.S1200.MESH16.grb nsstbufr omi.tm00.bufr_d ompslp.tm00.bufr_d ompsn8.tm00.bufr_d ompst8.tm00.bufr_d osbuv8.tm00.bufr_d prepbufr prepbufr.acft_profiles proflr.tm00.bufr_d rassda.tm00.bufr_d rtgssthr.grb rtgssthr.grib2 saldrn.tm00.bufr_d satwnd.tm00.bufr_d seaice.5min.grb seaice.5min.grib2 sevasr.tm00.bufr_d sfcshp.tm00.bufr_d snocvr.tm00.bufr_d snow.usaf.grib2 ssmisu.tm00.bufr_d sstvcw.tm00.bufr_d sstvpw.tm00.bufr_d status.tm00.bufr_d subpfl.tm00.bufr_d tesac.tm00.bufr_d tideg.tm00.bufr_d trkob.tm00.bufr_d updated.status.tm00.bufr_d uprair.tm00.bufr_d vadwnd.tm00.bufr_d"
-#B$-obsproc/v1.2.4#export DFILES="dump_alert_flag.tm00 1bamua.tm00.bufr_d 1bhrs4.tm00.bufr_d 1bmhs.tm00.bufr_d adpsfc.tm00.bufr_d adpupa.tm00.bufr_d ahicsr.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d airsev.tm00.bufr_d amsr2.tm00.bufr_d ascatt.tm00.bufr_d ascatw.tm00.bufr_d atms.tm00.bufr_d atmsdb.tm00.bufr_d avcsam.tm00.bufr_d avcspm.tm00.bufr_d bathy.tm00.bufr_d crsfdb.tm00.bufr_d crisf4.tm00.bufr_d engicegrb esamua.tm00.bufr_d esatms.tm00.bufr_d eshrs3.tm00.bufr_d esiasi.tm00.bufr_d esmhs.tm00.bufr_d geoimr.tm00.bufr_d gmi1cr.tm00.bufr_d gome.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d gsrasr.tm00.bufr_d gsrcsr.tm00.bufr_d hdob.tm00.bufr_d iasidb.tm00.bufr_d imssnow96.asc imssnow96.grib2 mtiasi.tm00.bufr_d NPR.SNWN.SP.S1200.MESH16.grb NPR.SNWS.SP.S1200.MESH16.grb nsstbufr omi.tm00.bufr_d ompslp.tm00.bufr_d ompsn8.tm00.bufr_d ompst8.tm00.bufr_d osbuv8.tm00.bufr_d prepbufr prepbufr.acft_profiles proflr.tm00.bufr_d rassda.tm00.bufr_d rtgssthr.grb rtgssthr.grib2 saldrn.tm00.bufr_d satwnd.tm00.bufr_d seaice.5min.grb seaice.5min.grib2 sevasr.tm00.bufr_d sfcshp.tm00.bufr_d snocvr.tm00.bufr_d ssmisu.tm00.bufr_d sstvcw.tm00.bufr_d sstvpw.tm00.bufr_d status.tm00.bufr_d subpfl.tm00.bufr_d tesac.tm00.bufr_d tideg.tm00.bufr_d trkob.tm00.bufr_d updated.status.tm00.bufr_d uprair.tm00.bufr_d vadwnd.tm00.bufr_d"
 export DFILES="dump_alert_flag.tm00 1bamua.tm00.bufr_d 1bhrs4.tm00.bufr_d 1bmhs.tm00.bufr_d adpsfc.tm00.bufr_d adpupa.tm00.bufr_d ahicsr.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d airsev.tm00.bufr_d amsr2.tm00.bufr_d ascatt.tm00.bufr_d ascatw.tm00.bufr_d atms.tm00.bufr_d atmsdb.tm00.bufr_d avcsam.tm00.bufr_d avcspm.tm00.bufr_d bathy.tm00.bufr_d crsfdb.tm00.bufr_d crisf4.tm00.bufr_d engicegrb esamua.tm00.bufr_d esatms.tm00.bufr_d eshrs3.tm00.bufr_d esiasi.tm00.bufr_d esmhs.tm00.bufr_d geoimr.tm00.bufr_d gmi1cr.tm00.bufr_d gome.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d gsrasr.tm00.bufr_d gsrcsr.tm00.bufr_d hdob.tm00.bufr_d iasidb.tm00.bufr_d imssnow96.asc imssnow96.grib2 mtiasi.tm00.bufr_d NPR.SNWN.SP.S1200.MESH16.grb NPR.SNWS.SP.S1200.MESH16.grb nsstbufr omi.tm00.bufr_d ompslp.tm00.bufr_d ompsn8.tm00.bufr_d ompst8.tm00.bufr_d osbuv8.tm00.bufr_d prepbufr prepbufr.acft_profiles proflr.tm00.bufr_d rassda.tm00.bufr_d rtgssthr.grb rtgssthr.grib2 saldrn.tm00.bufr_d satwnd.tm00.bufr_d seaice.5min.grb seaice.5min.grib2 sevasr.tm00.bufr_d sfcshp.tm00.bufr_d snocvr.tm00.bufr_d snow.usaf.grib2 ssmisu.tm00.bufr_d sstvcw.tm00.bufr_d sstvpw.tm00.bufr_d status.tm00.bufr_d subpfl.tm00.bufr_d tesac.tm00.bufr_d tideg.tm00.bufr_d trkob.tm00.bufr_d updated.status.tm00.bufr_d uprair.tm00.bufr_d vadwnd.tm00.bufr_d"
 export DFILES_GFS="seaice.5min.blend.grb snogrb_t1534.3072.1536 syndata.tcvitals.tm00"
-#B4-obsproc/v1.2#export DFILES_NR="adpsfc.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d saphir.tm00.bufr_d sfcshp.tm00.bufr_d"
 export DFILES_NR="adpsfc.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d sfcshp.tm00.bufr_d"
-#B4-v16.3#export DFILES_NRX="gpsro.tm00.bufr_d"
 export DFILES_NRX=""
-#WCOSS1#export DFILES_UR="adpsfc.tm00.bufr_d aircar.tm00.bufr_d aircft.tm00.bufr_d gpsipw.tm00.bufr_d gpsro.tm00.bufr_d saphir.tm00.bufr_d sfcshp.tm00.bufr_d"
 export DFILES_UR="aircar.tm00.bufr_d aircft.tm00.bufr_d prepbufr"
-#B4-v16.3#export DFILES_X="nsstbufr gpsro.tm00.bufr_d gmi1cr.tm00.bufr_d saldrn.tm00.bufr_d subpfl.tm00.bufr_d"
-#B$-v16.3.12#export DFILES_X="atms.tm00.bufr_d crisf4.tm00.bufr_d"
 export DFILES_X=""
 export DFILES_Y=""
 
