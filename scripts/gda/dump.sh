@@ -3,7 +3,7 @@ set -x
 
 ###############################################################
 # Source FV3GFS workflow modules
-. $HOMEgfs/ush/load_fv3gfs_modules.sh
+source $HOMEgfs/ush/load_fv3gfs_modules.sh
 status=$?
 [[ $status -ne 0 ]] && exit $status
 
@@ -11,7 +11,7 @@ status=$?
 # Source relevant configs
 configs="base dumparch"
 for config in $configs; do
-    . $EXPDIR/config.${config}
+    source $EXPDIR/config.${config}
     status=$?
     [[ $status -ne 0 ]] && exit $status
 done

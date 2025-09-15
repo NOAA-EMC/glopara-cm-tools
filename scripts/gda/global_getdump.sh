@@ -57,15 +57,32 @@ nshift=$#
 shift $nshift
 export FILES="${*:-${DFILES}}"
 
+# Capture all of the arguments to this script as a variable
+arguments="$0 $*"
+
 export VERBOSE=${VERBOSE:-"NO"}
 if [[ "$VERBOSE" = "YES" ]]
 then
-   echo $(date) EXECUTING $0 $* >&2
+   echo $(date) EXECUTING ${arguments} >&2
    set -x
 fi
 day=${day:-$(echo $CDATE|cut -c1-8)}
 cyc=${cyc:-$(echo $CDATE|cut -c9-10)}
 cyctz=${cyctz:-t$(echo $CDATE|cut -c9-10)z}
+
+send_email () {
+ # Check if mailfile exists and is non-zero size, then mail it
+ if [[ -z "${mailfile+x}" ]]; then
+   echo "FATAL ERROR: No mailfile provided to send_email, exiting..."
+   exit 1
+ fi
+
+ if [[ -s "${mailfile}" ]]; then
+   subject="global_getdump.sh recorded warning/errors"
+   # mail to $maillist, a comma-separated list of email addresses
+   cat ${mailfile} | mail -s "$subject" $maillist
+ fi
+}
 
 export COMPONENT="atmos"
 export COMGFSTMP=${COMGFSTMP:-${COMROOT}/gfs/v16.3/$CDUMP.\$day/$CDUMP.\$cyctz/${COMPONENT}/${CDUMP}.\$cyctz}
@@ -129,6 +146,19 @@ export err=0
 
 echo "Files copied into $COMOUT"
 $NLL $COMOUT
+
+if [[ ! -z "${cpn}" ]]; then
+  if [[ "${do_mail:-NO}" = "YES" ]]; then
+    mailfile=/tmp/getdump.$$.msg
+    echo "WARNING: Some files were not copied" >> $mailfile
+    echo "global_getdump.sh called as follows:" >> $mailfile
+    echo "  $arguments" >> $mailfile
+    for file_not_copied in $cpn; do
+      echo "  $file_not_copied" >> $mailfile
+    done
+    send_email
+  fi
+fi
 
 ################################################################################
 #  Postprocessing

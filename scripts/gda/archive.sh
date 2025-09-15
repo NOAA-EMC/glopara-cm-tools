@@ -54,10 +54,15 @@ do
    ;;
   *)
    echo "invalid option -$OPTARG, exiting..." 
-   exit
+   exit 1
    ;;
- esac
+  esac
 done
+
+if [[ -z "$SDATE" ]] ; then
+  echo "Must supply -c SDATE (YYYYMMDDHH)!"
+  exit 1
+fi
 
 # Set prod/dev machine
 #prodmac=${prodmac:-`cat /lfs/h1/ops/prod/config/prodmachinefile | grep primary | cut -c9- | cut -c1`}
@@ -80,6 +85,28 @@ export LDATE=${LDATE:-$SDATE}
 export CDUMPS=${CDUMPS:-'gfs gdas'}
 export COMPONENT=${COMPONENT:-"atmos"}
 
+send_email () {
+ # Check if mailfile exists and is non-zero size, then mail it
+ if [[ -z "${mailfile+x}" ]]; then
+   echo "FATAL ERROR: No mailfile provided to send_email, exiting..."
+   exit 1
+ fi
+
+ if [[ -s "${mailfile}" ]]; then
+   subject="GDA Dump Archive job recorded warning/errors"
+   # mail to $maillist, a comma-separated list of email addresses
+   cat ${mailfile} | mail -s "$subject" $maillist
+ fi
+}
+
+if [[ ${do_mail:-NO} == "YES" ]]; then
+  # Only mail errors and warnings
+  export maillist=${maillist:-"david.huber@noaa.gov"}
+  # Create a log file
+  export mailfile=/tmp/gda_dump_archive_mailfile.$$
+  echo "GDA Dump Archive job started at `date`" > $mailfile
+fi
+
 #export HOMEgda=${HOMEgda:-"/lfs/h2/emc/global/noscrub/emc.global/dump_archive"}
 #export EXPDIR=${EXPDIR:-$HOMEgda/gda}
 
@@ -94,7 +121,14 @@ export machs=${machs:-"all"}
 # Initialize modules
 . $HOMEgfs/ush/load_fv3gfs_modules.sh
 status=$?
-[[ $status -ne 0 ]] && exit $status
+
+if [[ $status -ne 0 ]]; then
+  if [[ ${do_mail:-NO} == "YES" ]]; then
+    echo "FATAL ERROR: Could not load modules, exiting..." >> $mailfile
+    send_email
+  fi
+  exit $status
+fi
 
 #------------------------------------------------------
 # Declare pickup function
@@ -154,7 +188,11 @@ pickup () {
     echo "Rsyncing $ifile from ${omac} to $ofile"
     $DMPCPCMD $USER@${omac}:$ifile $ofile
   elif [ $rc -ne 0 ]; then # Primary file missing
-    echo "WARNING: File $ifile missing!"
+    msg="WARNING: Target file $ifile is missing!"
+    echo "$msg"
+    if [ ${do_mail:-NO} == "YES" ]; then
+      echo "$msg" >> $mailfile
+    fi
   fi # rc check
  fi
 
@@ -217,7 +255,6 @@ do
        pickup $DATE nr gpsipw y $CDUMP y y $idir $odir
        pickup $DATE nr gpsro y $CDUMP y y $idir $odir
        pickup $DATE nr sfcshp y $CDUMP y y $idir $odir
-       pickup $DATE nr saphir y $CDUMP y y $idir $odir
       fi
      done
     ;;
@@ -356,9 +393,11 @@ do
         CPCcyc=`expr $CPCDATE | cut -c9-10`
         ifile=PRCP_CU_GAUGE_V1.0GLB_0.125deg.lnx.${CPCPDY}.RT
         efile=PRCP_CU_GAUGE_V1.0GLB_0.125deg.lnx.${CPCPDY}.RT${CPCSUF}
-	idir=$DCOMROOT/${CPCPDY}/wgrbbul/cpc_rcdas
+        idir=$DCOMROOT/${CPCPDY}/wgrbbul/cpc_rcdas
         #GDA copy
-	if [ -d $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ]; then mkdir $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ; fi
+        if [[ ! -d "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}" ]]; then
+            mkdir -p "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}"
+        fi
         $DMPCPCMD $idir/$ifile $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}/$ifile
         #GDAp copy
         #$DMPCPCMD $idir/$ifile $odir/${CDUMP}p.${CPCPDY}/${CPCcyc}/$ifile
@@ -366,7 +405,9 @@ do
         #Early copy at 12z
         if [ $cyc = "12" ]; then
           #GDA early copy
-	  if [ -d $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ]; then mkdir $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT} ; fi
+          if [[ ! -d "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}" ]]; then
+            mkdir -p "${odir}/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}"
+          fi
           $DMPCPCMD $idir/$ifile $odir/${CDUMP}.${CPCPDY}/${CPCcyc}/${COMPONENT}/$efile
           #GDAp copy
           #$DMPCPCMD $idir/$ifile $odir/${CDUMP}p.${CPCPDY}/${CPCcyc}/$efile
@@ -381,7 +422,7 @@ do
     # Wait till files available in /com (10z-16z)
       module load nco/$nco_ver
       COMIN=$(compath.py rtofs/${rtofs_ver})
-      if [ ! -d $odir/rtofs.$PDY ]; then mkdir $odir/rtofs.$PDY ; fi
+      if [ ! -d $odir/rtofs.$PDY ]; then mkdir -p $odir/rtofs.$PDY ; fi
       cd $odir/rtofs.$PDY
       $DMPCPCMD $COMIN/rtofs.$PDY/rtofs_glo_2ds_f00{0..9}_prog.nc ./
       $DMPCPCMD $COMIN/rtofs.$PDY/rtofs_glo_2ds_f0{1..7}?_prog.nc ./
@@ -392,8 +433,8 @@ do
 
       for file in $files
       do
-       ncks -v u_velocity,v_velocity $file temp.nc
-       mv -f temp.nc $file
+        ncks -v u_velocity,v_velocity $file temp.nc
+        mv -f temp.nc $file
       done
 
     ;;
