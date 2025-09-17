@@ -3,9 +3,6 @@ set -x
 
 ###############################################################
 # Source FV3GFS workflow modules
-source $HOMEgfs/ush/load_fv3gfs_modules.sh
-status=$?
-[[ $status -ne 0 ]] && exit $status
 
 ###############################################################
 # Source relevant configs
@@ -15,6 +12,19 @@ for config in $configs; do
     status=$?
     [[ $status -ne 0 ]] && exit $status
 done
+
+# Load modules
+set +x
+echo "Loading modules"
+module use "${HOMEgda}/gda/modulefiles"
+module load archive.wcoss2
+status=$?
+set -x
+
+if [[ $status -ne 0 ]]; then
+  echo "FATAL ERROR: Unable to load modules!"
+  exit $status
+fi
 
 ##############################################
 # Obtain unique process id (pid) and make temp directory

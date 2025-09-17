@@ -118,9 +118,13 @@ export SYNC_BACK=${SYNC_BACK:-"0"}
 export backchk="NO"
 export machs=${machs:-"all"}
 
-# Initialize modules
-. $HOMEgfs/ush/load_fv3gfs_modules.sh
+# Load modules
+echo "Loading modules"
+set +x
+module use "${HOMEgda}/gda/modulefiles"
+module load archive.wcoss2
 status=$?
+set -x
 
 if [[ $status -ne 0 ]]; then
   if [[ ${do_mail:-NO} == "YES" ]]; then

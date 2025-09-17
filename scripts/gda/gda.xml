@@ -39,7 +39,7 @@
   <cycledef>202306200000 202701011800 06:00:00</cycledef>
 
   <task name="gda.gfs" maxtries="2" cycledefs="gfs">
-        <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive ; module list ; source $EXPDIR/config.base ; source $EXPDIR/config.dumparch ; $EXPDIR/dump.sh'</command>
+        <command>sh -c '$EXPDIR/dump.sh'</command>
         <queue>&QUEUESERV;</queue>
         <account>&PROJ;</account>
         <jobname>gda.gfs_<cyclestr>@Y@m@d@H</cyclestr></jobname>
@@ -71,7 +71,7 @@
   </task>
 
   <task name="gda.gdas" maxtries="2" cycledefs="gdas">
-        <command>sh -c ' source $HOMEgfs/ush/load_fv3gfs_modules.sh exclusive ; module list ; source $EXPDIR/config.base ; source $EXPDIR/config.dumparch ; $EXPDIR/dump.sh'</command>
+        <command>sh -c '$EXPDIR/dump.sh'</command>
         <queue>&QUEUESERV;</queue>
         <account>&PROJ;</account>
         <jobname>gda.gdas_<cyclestr>@Y@m@d@H</cyclestr></jobname>
