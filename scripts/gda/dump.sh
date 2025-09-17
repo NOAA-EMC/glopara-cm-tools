@@ -3,7 +3,6 @@ set -x
 
 ###############################################################
 # Source FV3GFS workflow modules
-[[ $status -ne 0 ]] && exit $status
 
 ###############################################################
 # Source relevant configs
