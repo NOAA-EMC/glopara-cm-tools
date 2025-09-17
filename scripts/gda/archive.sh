@@ -123,8 +123,8 @@ echo "Loading modules"
 set +x
 module use "${HOMEgda}/gda/modulefiles"
 module load archive.wcoss2
-set -x
 status=$?
+set -x
 
 if [[ $status -ne 0 ]]; then
   if [[ ${do_mail:-NO} == "YES" ]]; then
