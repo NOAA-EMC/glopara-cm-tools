@@ -29,7 +29,7 @@ fi
 # Set account
 export USER=${USER:-emc.global}
 
-export gfs_ver="v16.3.26"
+export gfs_ver="v16.3.27"
 
 # Set GDA paths
 export DMPDIR="/lfs/h2/emc/dump/noscrub/dump"
