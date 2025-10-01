@@ -107,7 +107,7 @@
         <queue>&QUEUESERV;</queue>
         <account>&PROJ;</account>
         <jobname>gda.amsr2x_<cyclestr>@Y@m@d@H</cyclestr></jobname>
-        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_rtofs.log</cyclestr></join>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_amsr2x.log</cyclestr></join>
 
         <walltime>06:00:00</walltime>
         <nodes>1:ppn=1:tpp=1</nodes>
