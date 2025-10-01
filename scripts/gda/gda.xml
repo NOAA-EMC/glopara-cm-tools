@@ -102,6 +102,33 @@
         </dependency>
   </task>
 
+  <task name="gda.amsr2x" maxtries="2" cycledefs="gdas">
+        <command><cyclestr>sh -c '&EXPDIR;/archive.sh -c @Y@m@d@H -l amsr2'</cyclestr></command>
+        <queue>&QUEUESERV;</queue>
+        <account>&PROJ;</account>
+        <jobname>gda.amsr2x_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+        <join><cyclestr>&LOG_DIR;/@Y@m@d@H/dump_archive_rtofs.log</cyclestr></join>
+
+        <walltime>06:00:00</walltime>
+        <nodes>1:ppn=1:tpp=1</nodes>
+
+        <envar><name>CDATE</name><value><cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>PDY</name><value><cyclestr>@Y@m@d</cyclestr></value></envar>
+        <envar><name>cyc</name><value><cyclestr>@H</cyclestr></value></envar>
+        <envar><name>EXPDIR</name><value>&EXPDIR;</value></envar>
+        <envar><name>CDUMP</name><value>gdas</value></envar>
+        <envar><name>RUN_ENVIR</name><value>emc</value></envar>
+        <envar><name>DATAROOT</name><value>&DATAROOT;</value></envar>
+        <envar><name>job</name><value>dump_archive_amsr2x_<cyclestr>@H</cyclestr></value></envar>
+        <envar><name>DATA</name><value>&DATAROOT;/dump_archive_amsr2x_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
+        <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
+        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
+
+        <dependency>
+          <taskdep task="gda.gdas"/>
+        </dependency>
+  </task>
+
   <task name="gda.rtofs" maxtries="2" cycledefs="rtofs">
         <command><cyclestr>sh -c '&EXPDIR;/archive.sh -c @Y@m@d@H -l rtofs'</cyclestr></command>
         <queue>&QUEUESERV;</queue>
@@ -160,6 +187,7 @@
           <and>
              <taskdep task="gda.gfs"/>
              <taskdep task="gda.gdas"/>
+             <taskdep task="gda.amsr2x"/>
           </and>
         </dependency>
   </task>
@@ -178,6 +206,7 @@
           <and>
              <taskdep task="gda.gfs"/>
              <taskdep task="gda.gdas"/>
+             <taskdep task="gda.amsr2x"/>
           </and>
         </dependency>
   </task>
