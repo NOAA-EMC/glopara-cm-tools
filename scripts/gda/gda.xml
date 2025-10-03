@@ -63,6 +63,7 @@
         <dependency>
           <and>
             <datadep><cyclestr>&COMOBS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.updated.status.tm00.bufr_d</cyclestr></datadep>
+            <datadep><cyclestr>&COMOBS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.nsstbufr</cyclestr></datadep>
             <datadep><cyclestr>&COMGFS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.seaice.5min.blend.grb</cyclestr></datadep>
             <datadep><cyclestr>&COMGFS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.snogrb_t1534.3072.1536</cyclestr></datadep>
             <datadep><cyclestr>&COMGFS;/gfs.@Y@m@d/@H/atmos/gfs.t@Hz.syndata.tcvitals.tm00</cyclestr></datadep>
@@ -95,6 +96,7 @@
         <dependency>
           <and>
             <datadep><cyclestr>&COMOBS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.updated.status.tm00.bufr_d</cyclestr></datadep>
+            <datadep><cyclestr>&COMOBS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.nsstbufr</cyclestr></datadep>
             <datadep><cyclestr>&COMGFS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.seaice.5min.blend.grb</cyclestr></datadep>
             <datadep><cyclestr>&COMGFS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.snogrb_t1534.3072.1536</cyclestr></datadep>
             <datadep><cyclestr>&COMGFS;/gdas.@Y@m@d/@H/atmos/gdas.t@Hz.syndata.tcvitals.tm00</cyclestr></datadep>
