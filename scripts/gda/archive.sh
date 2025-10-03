@@ -231,15 +231,7 @@ do
   #Set initial values
   export odir=$DMPDIR
 
-  #HISTORICAL#clist=${clist:-"gdasnr gdasur gmi ahicsr buoyb satwnd goes16v2 metopc ompslp satwnd_leogeo viirs omi ompsn cpcgauge rtofs crisfsr tac2bufr buoyb saldrn hdob gpsrox gpsroy mtiasi subpfl vadwnd"}
-  #KF#clist=${clist:-"gdasnr gdasur gmi saldrn gpsrox subpfl cpcgauge"}
-  #B4-v16.3#clist=${clist:-"gdasnr gdasur gmi saldrn gpsrox subpfl cpcgauge"}
-  #TURN-OFF_GDASUR-20230525#clist=${clist:-"gdasnr gdasur noaa21 cpcgauge"}
-  #clist=${clist:-"gdasnr noaa21 cpcgauge"}
-  #B4-v16.3.12#clist=${clist:-"gdasnr noaa21 imsasc cpcgauge"}
-  clist=${clist:-"gdasnr imsasc cpcgauge"}
-  #clist=${clist:-"gdasnr gdasur"}
-  #clist=${clist:-""}
+  clist=${clist:-"gdasnr amsr2 imsasc cpcgauge"}
 
   for c in $clist
   do
@@ -262,98 +254,17 @@ do
       fi
      done
     ;;
+    amsr2)
+      # pickup experimental amsr2 files from Steve (x-sub)
+      # backfilled to 2025091700
+      # started real-time 2020093018
+      # Only valid for gdas CDUMPs
+      CDUMP=gdas
+      backchk="NO"
+      idir=/lfs/h2/emc/obsproc/noscrub/steve.stegall/DCOMDIR/AMSR2_dump_GSI/CRON/AMSR2/com/obsproc/v1.3
+      pickup $DATE x amsr2 y $CDUMP y y $idir $odir
+    ;;
     #------------------------------------------------------
-    #gdasur)
-    # # ur-dumps 
-    # # pickup unrestricted restricted files from Shelley (after 48hrs)
-    # # WCOSS2 2022062812 - only aircar, aircft, prepbufr
-    # # Discontinued pickup 20230525 - last cycle in archive 2023052300
-    # for CDUMP in $CDUMPS; do
-    #  if [ $CDUMP = gdas -o $CDUMP = gfs ]; then
-    #   backchk="NO"
-    #   idir=/lfs/h2/emc/stmp/shelley.melchior/CRON/nr33/com/obsproc/v1.1
-    #   #pickup $URDATE ur adpsfc y $CDUMP y y $idir $odir
-    #   pickup $URDATE ur aircar y $CDUMP y y $idir $odir
-    #   pickup $URDATE ur aircft y $CDUMP y y $idir $odir
-    #   #pickup $URDATE ur gpsipw y $CDUMP y y $idir $odir
-    #   #pickup $URDATE ur gpsro y $CDUMP y y $idir $odir
-    #   #pickup $URDATE ur sfcshp y $CDUMP y y $idir $odir
-    #   #pickup $URDATE ur saphir y $CDUMP y y $idir $odir
-    #   pickup $URDATE ur prepbufr n $CDUMP y y $idir $odir
-    #  fi
-    # done
-    #;;
-    #------------------------------------------------------
-    #gmi)
-    # pickup new gmi files
-    # backfilled to 8/2 12z gdas, real-time 2016092012
-    # for CDUMP in $CDUMPS; do
-    #  if [ $CDUMP = gdas -o $CDUMP = gfs ]; then
-    #   backchk="YES"
-    #   idir=/lfs/h2/emc/stmp/iliana.genkova/CRON/GMI/com/obsproc/v1.0
-    #   pickup $DATE x gmi1cr y $CDUMP y y $idir $odir
-    #  fi
-    # done
-    #;;
-    #------------------------------------------------------
-    #saldrn)
-    # pickup saildrone dump files from Steve (x-sub)
-    # backfilled to 2020063018
-    # started real-time 2020070212
-    # for CDUMP in $CDUMPS; do
-    #  if [ $CDUMP = gdas -o $CDUMP = gfs ]; then
-    #   backchk="NO"
-    #   idir=/lfs/h2/emc/ptmp/steve.stegall/CRON/NSST_subpfl_issue51959/com/obsproc/v1.0
-    #   pickup $DATE x saldrn y $CDUMP y y $idir $odir
-    #  fi
-    # done
-    #;;
-    #------------------------------------------------------
-    #gpsrox)
-    # pickup gpsro dump files from Steve (x-sub)
-    # Sentinel-6 GNSSRO
-    # started 2021102000
-    # GDAnrx copy started 2022042518
-    # for CDUMP in $CDUMPS; do
-    #  if [ $CDUMP = gdas -o $CDUMP = gfs ]; then
-    #   backchk="NO"
-    #   idir=/lfs/h2/emc/ptmp/steve.stegall/CRON/Sentinel_6_issue97485/com/obsproc/v1.0
-    #   pickup $DATE x gpsro y $CDUMP y y $idir $odir
-    #   pickup $DATE nrx gpsro y $CDUMP y y $idir $odir
-    #  fi
-    # done
-    #;;
-    #------------------------------------------------------
-    #subpfl)
-    # pickup subpfl dump files from Shelley (x-sub)
-    # switch to Steve pickup (20220125)
-    # started 2022011218 gdas
-    # added nsstbufr pickup 2022012512
-    # for CDUMP in $CDUMPS; do
-    #  if [ $CDUMP = gdas -o $CDUMP = gfs ]; then
-    #   backchk="NO"
-    #   idir=/lfs/h2/emc/ptmp/steve.stegall/CRON/NSST_subpfl_issue51959/com/obsproc/v1.0
-    #   pickup $DATE x subpfl y $CDUMP y y $idir $odir
-    #   pickup $DATE x nsstbufr n $CDUMP y y $idir $odir
-    #  fi
-    # done
-    #;;
-    #------------------------------------------------------
-    #noaa21)
-    # pickup NOAA-21 ATMS and CRIS from Sudhir (x-sub)
-    # started 2023030900
-    # for CDUMP in $CDUMPS; do
-    #  if [ $CDUMP = gdas -o $CDUMP = gfs ]; then
-    #   backchk="NO"
-    #   idir=/lfs/h2/emc/obsproc/noscrub/sudhir.nadiga/DUMPDIR/JGLOBALDUMP/CRON/CONUS/com/obsproc/v1.0
-    #   pickup $DATE x atms y $CDUMP y y $idir $odir
-    #   pickup $DATE x crisf4 y $CDUMP y y $idir $odir
-    #   pickup $GDATE x atms y $CDUMP y y $idir $odir
-    #   pickup $GDATE x crisf4 y $CDUMP y y $idir $odir
-    #  fi
-    # done
-    #;;
-    #-----------------------------------------------------------
     imsasc)
     # pickup ASCII version of IMS snow file from dcom (prod dump)
     # started 20231012
@@ -377,12 +288,6 @@ do
     ;;
     #-----------------------------------------------------------
     cpcgauge)
-    #/gpfs/dell2/emc/modeling/noscrub/emc.glopara/stat/cpcUniGauge/2018/PRCP_CU_GAUGE_V1.0GLB_0.125deg.lnx.20180101.RT
-    #/gpfs/dell1/nco/ops/dcom/prod/20200115/wgrbbul/cpc_rcdas/PRCP_CU_GAUGE_V1.0GLB_0.125deg.lnx.20200115.RT
-    #/gpfs/dell2/emc/modeling/noscrub/emc.glopara/stat/cpcUniGauge/${yyyy}
-    #/lfs/h1/ops/prod/dcom/20220502/wgrbbul/cpc_rcdas/PRCP_CU_GAUGE_V1.0GLB_0.125deg.lnx.20220502.RT
-    # backfilled to 20180101
-    # realtime 20200124
      for CDUMP in $CDUMPS; do
       if [ $CDUMP = gdas -a $cyc -ge "12" ]; then
         #pickup CPC GAUGE from dcom - once daily during 12z gdas, 36hr backdate for 00z gdas, early copy
