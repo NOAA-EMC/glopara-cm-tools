@@ -29,7 +29,7 @@ fi
 # Set account
 export USER=${USER:-emc.global}
 
-export gfs_ver="v16.3.27"
+export gfs_ver="v16.3.28"
 
 # Set GDA paths
 export DMPDIR="/lfs/h2/emc/dump/noscrub/dump"
@@ -64,7 +64,7 @@ export SUP_BACK=0
 
 #export DALERT="YES"
 export DALERT="NO"
-export DMPCPCMD="rsync -azvp --checksum"
+export DMPCPCMD="rsync -avp --checksum"
 export DMPSUP="YES"
 export DMPTRAN="YES"
 
