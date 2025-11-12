@@ -1,0 +1,504 @@
+<html>
+<head><meta http-equiv="refresh" content="300"></head>
+<body bgcolor=#76B8D2>
+<b><u>GDA Notes:</u></b><br>
+<br>
+WCOSS2:<br>
+20210324<br>
+2021101500 - present<br>
+<br>
+Hera:<br>
+2019120100 - 2020022918<br>
+2020053100 - 2020120618<br>
+2021032400 - present<br>
+<br>
+---------------------<br>
+<br>
+<b> Add new AFWA snow</b><br>
+Update GDA to use gfs.v16.3.23<br>
+and archive new snow.usaf.grib2 file<br>
+Started 2025032600<br>
+<br>
+<b> RTOFSv2.4.4 upgrade</b><br>
+Update GDA to use gfs.v16.3.17 and rtofs.v2.4.4<br>
+<br>
+<b>Experimental dump added</b><br>
+20240812 - added sfcsno<br>
+gdas.20211220/18/gdas.t18z.sfcsno.tm00.bufr_d<br>
+gdas.20211221/00/gdas.t00z.sfcsno.tm00.bufr_d<br>
+gfs.20211221/00/gfs.t00z.sfcsno.tm00.bufr_d<br>
+Added recently:<br>
+gfs.20211220/18/gfs.t18z.IMS4km_to_FV3_mapping.C48_oro_data.nc<br>
+gfs.20211220/18/gfs.t18z.IMS4km_to_FV3_mapping.C96_oro_data.nc<br>
+gfs.20211220/18/gfs.t18z.ims2021354_4km_v1.3.nc<br>
+gfs.20211220/18/gfs.t18z.snocvr_snow.nc4<br>
+gfs.20211220/18/gfs.t18z.viirs_n20.2021122018.nc4<br>
+gfs.20211220/18/gfs.t18z.viirs_npp.2021122018.nc4<br>
+<br>
+<b>ERROR: early PRCP picked up late</b><br>
+20240624<br>
+<br>
+<b>Missing CPC Gauge</b><br>
+20240415 - 20240418<br>
+<br>
+<b>ERROR: PRCP picked up late</b><br>
+20231015 and 20231016 files<br>
+<br>
+<b>Add ASCII IMS pickup to gdas once daily</b><br>
+Started 20231008<br>
+<br>
+<b>Add AMSR2 to prod pickup</b><br>
+Started 2023072518<br>
+<br>
+<b>Discontinued GDAur archival</b><br>
+Stopped 20230525<br>
+Last cycle 2023052300<br>
+<br>
+<b>Add experimental NOAA-21 ATMS & CRIS</b><br>
+2023030900 start<br>
+?????????? end<br>
+<br>
+<b>Add new snocvr from prod</b><br>
+<br>
+<b>Discontinue GFSv16.3 pickups</b><br>
+Now in prod dumps:<br>
+- gmi1cr<br>
+- gpsro & gpsro nr<br>
+- nsstbufr<br>
+- saldrn<br>
+- subpfl<br>
+<br>
+<b>Missing GDAur prepbufr</b><br>
+2022083006 gdas<br>
+<br>
+<b>CPC Gauge 00z Early Wrong</b><br>
+20220629<br>
+20220715<br>
+20220717-20220720<br>
+20220815<br>
+<br>
+<b>WCOSS2 GO-LIVE</b><br>
+2022062812<br>
+<br>
+<b>UR on WCOSS2</b><br>
+2022062812 go-live<br>
+Now only aircar, aircft, prepbufr<br>
+<br>
+<b>GMI outage</b><br>
+Started 2022050906<br>
+<br>
+<b>Add gpsro nr to GDAnrx</b><br>
+Started 2022042518<br>
+<br>
+<b>Discontinue vadwnd/prepbufr</b><br>
+Ended 2022041206<br>
+<br>
+<b>Add vadwnd/prepbufr</b><br>
+GDAx<br>
+Backfilled: 2022031012 gdas & 2022031018 gfs<br>
+Real-time: 20202031112<br>
+<br>
+<b>Discontinue mtiasi pickup</b><br>
+Ended 2022012500<br>
+<br>
+<b>Add saldrn/subpfl nsstbufr</b><br>
+GDAx<br>
+Backfilled: 2022012200<br>
+Real-time: 2022012512<br>
+<br>
+<b>Add subpfl</b><br>
+GDAx<br>
+Backfilled: 2022011218 gdas<br>
+Real-time: 2022011812<br>
+<br>
+<b>Sentinel-6 GPSRO</b><br>
+GDAx<br>
+Real-time started: 2021102000<br>
+<br>
+<b>TAC2BUFR in OPS</b><br>
+2021081806 gdas<br>
+<br>
+<b>Missing saldrn</b><br>
+WCOSS outage<br>
+2021062200 ~ 2021062506<br>
+2021072006 ~ 2021072212<br>
+<br>
+<b>TAC2BUFR</b><br>
+adpsfc,prepbufr,sfcshp,tideg<br>
+Backfilled: 2021052800 gdas<br>
+Real-time started: 2021061012 gdas<br>
+Real-time started: 2021061218 gfs<br>
+Ended: 2021081806<br>
+<br>
+<b>GDAur hole</b><br>
+Missing 2021031700 - 2021033118<br>
+<br>
+<b>Discontinue GDAp</b><br>
+GFSv16 implemented 2021032212<br>
+Move GDAp to GDA<br>
+<br>
+<b>gpsro GDAx/y</b><br>
+GDAx - commercial only<br>
+Non-realtime started: 2020121500<br>
+Ended: 2021011518<br>
+GDAy - commerical + non-commercial<br>
+Real-time started: 2021010600<br>
+Real-time ended: 2021011518<br>
+Round 2 test: 2021030818 - 2021031018<br>
+Round 2 real-time: 2021031712<br>
+Round 2 ended: 2021041406<br>
+<br>
+<b>RTOFS v2 in ops</b><br>
+Started: 20201209<br>
+Filename changes, no more symlinks<br>
+<br>
+<b>CPC Gauge update</b><br>
+Started: 2020120712<br>
+Push final pickup to 66hrs.<br>
+Add early pickup at 36hrs.<br>
+<br>
+<b>GDAxy now in GDAp</b><br>
+GDAx - ahicsr, gsr, sst viirs, hdob, ompslp discontinued<br>
+GDAy - satwnd_leogeo discontinued<br>
+<br>
+<b>GDAp</b><br>
+Started: 2020102912<br>
+Ended: 2021032212<br>
+<br>
+<b>GFSv15.3.3</b><br>
+GDA - goesfv, dbuoyb, mbuoyb discontinued<br>
+GDAy - adpsfc/sfcshp discontinued<br>
+End: 2020102206 gfs<br>
+<br>
+<b>hdob</b><br>
+GDAx - hdob<br>
+Backfill/Real-time: 2020082412<br>
+<br>
+<b>tac2bufr adpsfc/sfcshp2</b><br>
+GDAy - adpsfc/sfcshp<br>
+Backfill: 2020070706<br>
+Real-time: 2020070812<br>
+End: 2020091512<br>
+<br>
+<b>saildrone</b><br>
+GDAx - saldrn<br>
+Backfill: 2020063018<br>
+Real-time: 2020070212<br>
+<br>
+<b>dbuoyb w/ saildrone</b><br>
+Backfill: 2020040718<br>
+Real-time: 2020041312<br>
+Discontinued: 2020070206<br>
+<br>
+<b>tac2bufr sfcshp</b><br>
+GDAx - sfcshp<br>
+Backfill: 2020053100<br>
+Real-time: 2020060818<br>
+End: 2020072906<br>
+<br>
+<b>gsrcsr-y discontinued</b><br>
+Stopped GDAy gsrcsr 2020052612<br>
+GDAx gsrcsr contains G16+G17 now<br>
+<br>
+<b>mtiasi MetOp-C now in ops</b><br>
+Discontinue pickup 20200525<br>
+<br>
+<b>CrIS ops</b><br>
+2020042206 gdas<br>
+Retired cris<br>
+Renamed crisdb to crsfdb<br>
+Renamed escris to escrsf<br>
+20200511 escrsf retired<br>
+<br>
+<b>NPP CrIS FSR</b><br>
+GDAx - crsfdb<br>
+No backfill<br>
+Real-time: 2020040812<br>
+End: 2020042206<br>
+<br>
+<b>Metop-C pickup</b><br>
+GDAx - mtiasi<br>
+Backfill: 2020030606<br>
+Real-time: 2020032712<br>
+<br>
+<b>OMPS outage</b><br>
+2020032612 - ?<br>
+<br>
+<b>Unrestricted files</b><br>
+Start: 2020020618<br>
+<br>
+<b>CPC Gauge pickup</b><br>
+Backfill: 2018010100<br>
+Real-time: 2020012400<br>
+00z gdas only<br>
+<br>
+<b>Combined gsrcsr pickup</b><br>
+Backfill: 2019111000<br>
+Real-time: 2019112212<br>
+<br>
+<b>VIIRS dumps</b><br>
+Backfill: 2019092800<br>
+Real-time: 2019100718<br>
+<br>
+<b>Discontinue GOES-17 satwnd</b><br>
+Last cycle: 2019091718<br>
+<br>
+<b>GFSv15.2 p-dumps</b><br>
+Start: 2019092312<br>
+End: 2019110706<br>
+<br>
+<b>leogeo satwnd pickup</b><br>
+Backfill: 2019083012<br>
+Real-time: 2019091112<br>
+<br>
+<b>OMPS-LP pickup</b><br>
+Backfill: 2019083012<br>
+Real-time: 2019090512<br>
+gdas only<br>
+<br>
+<b>GMI outage</b><br>
+2019062600 to 2019071212<br>
+gdas[gfs]x<br>
+<br>
+<b>CRIS outage</b><br>
+2019032700 to 2019041612<br>
+gdas[gfs]s[p]<br>
+<br>
+<b>Discontinue OMPS</b><br>
+In ph3 prod now<br>
+Last cycle: 2019040800<br>
+<br>
+<b>New GOES-17 satwnd</b><br>
+Backfill: 2019022200<br>
+Real-time: 2019030118<br>
+<br>
+<b>New Metop-C (1bamua/1bmhs)</b><br>
+Backfill: 2018120800<br>
+Real-time: 2019030118<br>
+<br>
+<b>New goes16 v2 gsrasr/gsrcsr</b><br>
+Backfill: 2019022706<br>
+Real-time: 2019022818<br>
+<br>
+<b>Discontinue goes16_csr version 1 pickup</b><br>
+Last cycle: 2019022812<br>
+<br>
+<b>BUFR format buoys</b><br>
+mbuoyb (moored buoys) & dbuoyb (drifting buoys)<br>
+Backfill: 2018121500<br>
+Real-time: 2019011812<br>
+<br>
+<b>P-DUMP from Dells</b><br>
+Discontinued Jeff's dumps and started Dell prod pickup 2018101100<br>
+<br>
+<b>Discontinue N20 ATMS/CRISF4</b><br>
+Last cycle 2018051018<br>
+<br>
+<b>New OMPS</b><br>
+Backfill: 2018031200<br>
+Real-time: 2018050412<br>
+<br>
+<b>New N20 ATMS/CRISF4</b><br>
+Backfill: 2018021700<br>
+Real-time: 2018041612<br>
+<br>
+<b>New nr files</b><br>
+Start pickup 2018032200<br>
+<br>
+<b>Pickup AVHRR</b><br>
+Backfill: 2018030212<br>
+Real-time: 2018031312<br>
+<br>
+<b>AHICSR outage</b><br>
+2018012918 to ???<br>
+<br>
+<b>Snow file outage</b><br>
+IMSSNOW & snogrb T574<br>
+Missing: 2018013000 gfs<br>
+Late arriving file, leaving as missing<br>
+<br>
+<b>Discontinue satwnd pickup</b><br>
+2017122112 gfs final pickup of AMV (x) and PDA (y) satwnd<br>
+<br>
+<b>GOES-16 outage</b><br>
+20171201 to 2017121412<br>
+<br>
+<b>Pickup PDA satwnd</b><br>
+2017110700 backfill gdas[gfs]y<br>
+2017111612 real-time gdas[gfs]y<br>
+<br>
+<b>Pickup GOES-16 AMVs satwnd</b><br>
+2017091700 backfill gdas[gfs]x<br>
+2017102712 real-time gdas[gfs]x<br>
+<br>
+<b>Pickup CrIS full spectral (431 channel subset)</b><br>
+2017101918 backfill gdas[gfs]x<br>
+2017102312 real-time gdas[gfs]x<br>
+<br>
+<b>Pickup nsstbufr in regular dump</b><br>
+2017071912 backfill<br>
+2017091812 real-time<br>
+<br>
+<b>Discontinue pickup of experimental aircar/aircft files for Dagmar</b><br>
+Last cycle with files: 2017072006<br>
+<br>
+<b>Machine outage</b><br>
+~2017070306 - 2017071000<br>
+prepbufr(nr) and sstoi(x)<br>
+<br>
+<b>ATMS[DB]/CRIS[DB] outage</b><br>
+2017062912 gfs/gfsp<br>
+<br>
+<b>Pickup Himawari csr data</b><br>
+2017060100 real-time<br>
+<br>
+<b>GMI outage</b><br>
+2017051006 gdas to 2017051106<br>
+<br>
+<b>PARA dumps</b><br>
+2017041900 to present<br>
+<br>
+<b>Prod filename symlinks</b>
+2016100100<br>
+<br>
+<b>Backfill prepbufr[.acft_profiles]</b><br>
+2016100100<br>
+<br>
+<b>Pickup reprocessed nr prepbufr & aircar/aircft files to overwrite prod nr copies 48hrs later</b><br>
+2017032312 gdas<br>
+2017040206 gfs<br>
+<br>
+<b>Pickup prepbufr and prepbufr.acft_profiles</b><br>
+2017032012 real-time<br>
+<br>
+<b>EARS, DBNET, and saphir in production</b><br>
+2017022112 gdas[gfs]x -> gdas[gfs]<br>
+<br>
+<b>MLS data discontinued</b><br>
+2017020918 last cycle<br>
+Some zero size files prior<br>
+<br>
+<b>Pickup new aircar/aircft data (round 2)</b><br>
+2017020212 gfs backfill<br>
+2017020306 real-time<br>
+<br>
+<b>Pickup EARS data (RARS round 2)</b><br>
+2016102600 backfill<br>
+2016111812 real-time<br>
+<br>
+<b>Pickup of new GMI data</b><br>
+2016080212 gdas backfill<br>
+2016092012 gdas real-time<br>
+<br>
+<b>Pickup of new DBNET data</b><br>
+2016080212 gdas backfill<br>
+2016081112 gdas real-time<br>
+<br>
+<b>Outage of SAPHIR data</b><br>
+2016081012/18 gdas/gfs & 2016081100 gfs<br>
+<br>
+<b>Pickup of new SAPHIR data</b><br>
+2016061000 backfill<br>
+2016061512 real-time<br>
+<br>
+<b>Pickup of new RARS data</b><br>
+gfs dump only<br>
+esatms, escris, esiasi files<br>
+2016060312 real-time<br>
+Complete back-fill to 2016052406<br>
+Partial back-fill to 2016050100<br>
+<br>
+<b>Discontinue p-dumps for Q3FY16</b><br>
+20160512<br>
+<br>
+<b>Q3FY16 /com2</b><br>
+2016051112 get dump files from /com2 now<br>
+<br>
+<b>Discontinue aircar/aircft pickup</b><br>
+2016051112<br>
+<br>
+<b>Discontinue VIIRS satwnd pickup</b><br>
+2016032412 last cycle<br>
+<br>
+<b>p-dumps for Q3FY16</b><br>
+start:<br>
+2016031512 gfs<br>
+2016031518 gdas<br>
+<br>
+<b>aircar/aircft-x differ from ops tanks</b><br>
+2016010212 gdas<br>
+2016010218 gfs<br>
+<br>
+<b>Pickup of new aircar/aircft (x) </b><br>
+2015122400 gdas<br>
+2015123018 gfs<br>
+<br>
+<b>Switched from VIIRS satwnd to Himawari satwnd (y)</b><br>
+2015080100 - present<br>
+<br>
+<b>Missing IMS file</b><br>
+2015041900 - 2015041918?<br>
+<br>
+<b>Added satwnd files with VIIRS winds</b><br>
+2014091300 - 2015081012 with some early holes<br>
+gdasv/gfsv<br>
+<br>
+<b>GFS upgrade completed, new dump files live 2015011412 gdas</b><br>
+52/51, 1/0 x/y<br>
+<br>
+<b>No more esamub</b><br>
+Dump file turned off in p-dumps 2014102812 and prod dump 2014110412<br>
+52/51 prod files<br>
+<br>
+<b>2014102818 p-dumps stable</b><br>
+Ready for use in parallel, 52/51 files<br>
+<br>
+<b>20141022 Missing IMS</b><br>
+Due to NESDIS server outage I copied IMS/snogrb_t data from 2014102118 to the 2014102200[06][12 gfs] folders.<br>
+<br>
+<b>2014101300 p-dump</b><br>
+Started dump stream from /com/gfs/para<br>
+<br>
+<b>20140922 00z ICs no more</b><br>
+Turned dcop off for 00z, GSGDAS=NO.<br>
+<br>
+<b>2014040812 gdasx snogrb_T574</b><br>
+Began generating T574 linear grid snogrb file in gdasx<br>
+<br>
+<b>2014040812 gdas/gfs</b><br>
+Moved sea ice, RTG, and snow files from gdas[gfs]x to gdas[gfs]<br>
+<br>
+<b>Early 201404 oscat data</b><br>
+<br>
+Discontinuing oscat data pull after instrument issues<br>
+<br>
+<b>2013061812 oscat (oscatw) data</b><br>
+<br>
+Began populating gdas[gfs]x with oscat data (oscatw.$CDUMP.$CDATE)<br>
+<br>
+<b>20121217 cris data</b><br>
+<br>
+Moved cris from gdas[gfs]x to gdas[gfs]. Removed zero size files back to 20121018. Backfilled from HPSS.<br>
+<br>
+<b>20121204 missing data</b><br>
+<br>
+Machine maintenance caused outage and wasn't able to reproduce:<br>
+12z - gdasx & gdasy<br>
+18z - gdasx, gdasy, gfsx, gfsy<br>
+<br>
+<b>2012041700</b><br>
+<br>
+- addition of MLS dump data to gdas[gfs] directories<br>
+<br>
+<b>2012020418</b><br>
+<br>
+- removal of AMSRE (amsre)<br>
+- movement of SEVIRI (sevcsr) & ATMS (atms) to production gdas[gfs]x --> gdas[gfs]<br>
+<br>
+<b>2012071006 gdas</b><br>
+<br>
+sevcsr, atms, mls, trkob, tesac, & bathy files moved from gdasx script to regular dump script<br>
+bathy, tesac, trkob no longer in gdas[gfs]x, now in gdas[gfs]<br>
+<br>
+</body>
+</html>
