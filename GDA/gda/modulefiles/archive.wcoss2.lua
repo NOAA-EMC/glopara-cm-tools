@@ -12,6 +12,7 @@ load(pathJoin("python", os.getenv("python_ver")))
 load(pathJoin("prod_envir", os.getenv("prod_envir_ver")))
 
 load(pathJoin("prod_util", os.getenv("prod_util_ver")))
+load(pathJoin("libjpeg"))
 load(pathJoin("grib_util", os.getenv("grib_util_ver")))
 load(pathJoin("bufr_dump", os.getenv("bufr_dump_ver")))
 load(pathJoin("util_shared", os.getenv("util_shared_ver")))
