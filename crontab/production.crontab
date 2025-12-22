@@ -1,10 +1,19 @@
-#######################
-#SHELL=/bin/bash -l
+########################
+## EMC.GLOBAL CRONTAB ##
+########################
+SHELL=/bin/bash -l
+
+############################################################################
+# RETRO CRONS
+############################################################################
+####NEEDS UPDATE MAILTO="kate.friedman@noaa.gov"
+MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov"
+#################### test ####################
 
 ############################################################################
 # ROCOTO 4 CI
 ######################
-# DISABLED; all CI should be run manually on WCOSS2
+# DISABLED; all CI tests should be run manually on WCOSS2
 #*/5 * * * * /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.sh > /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.log 2>&1
 
 ############################################################################
@@ -14,8 +23,9 @@
 
 ############################################################################
 #### GLOBAL DUMP ARCHIVE ####
-MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov,ashley.stanfield@noaa.gov"
+####NEEDS UPDATE MAILTO="kate.friedman@noaa.gov"
 
+#*/15 * * * * /lfs/h2/emc/global/noscrub/emc.global/scripts/GFS_VERSION/gfs_version.sh > /lfs/h2/emc/global/noscrub/emc.global/scripts/GFS_VERSION/gfs_version.log 2>&1
 
 ######################
 # Main GDA job
@@ -27,13 +37,70 @@ MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov
 ######################
 # Main dump
 45 * * * * /lfs/h2/emc/global/noscrub/emc.global/dump_archive/MONITOR/monitor_filecounts.sh > /lfs/h2/emc/stmp/emc.global/gda/logs/monitor_filecounts.log 2>&1
-###########################################################################
 
-#################################
-# GFSv17 Retro Test Experiements 
-#################################
-# POC: Jessica Meixner, Cathy Thomas and Ruiyu Sun
-#################### retrotestgfs01 ####################
-MAILTO="jessica.meixner@noaa.gov"
-#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.db -w /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.xml
-#################################################################
+############################################################################
+#### CI SYSTEM ####
+# SHELL=/bin/bash -l
+# MAILTO="walter.kolczynski@noaa.gov"
+# ci_home=/lfs/h2/emc/global/save/emc.global/CI_HOME/ci/scripts
+# ci_root=/lfs/h2/emc/global/noscrub/emc.global/GFS_CI_ROOT
+# d_cmd=date +%Y-%m-%d-%H:%M
+# */4 * * * * d=$($d_cmd); ${ci_home}/run_ci.sh >& ${ci_root}/ci_logs/run_ci_${d}.log || echo "ERROR in run_ci"
+# */7 * * * * d=$($d_cmd); ${ci_home}/check_ci.sh >& ${ci_root}/ci_logs/check_ci_${d}.log || echo "ERROR in check_ci"
+
+############################################################################
+
+
+##############
+# GFS Retro Tests
+################
+MAILTO="jessica.meixner@noaa.gov,catherine.thomas@noaa.gov,ruiyu.sun@noaa.gov"
+
+*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_realtime/rt17_upd03_realtime.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_realtime/rt17_upd03_realtime.xml
+
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream2/rt17_upd03_stream2.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream2/rt17_upd03_stream2.xml
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream3/rt17_upd03_stream3.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream3/rt17_upd03_stream3.xml
+
+#################
+# GFSv17 Retros #
+#################
+MAILTO="jessica.meixner@noaa.gov,catherine.thomas@noaa.gov,ruiyu.sun@noaa.gov,jiande.wang@noaa.gov,christian.boyer@noaa.gov,jiande.wang@noaa.gov"
+
+#realtime
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_realtime/retrov17_01_realtime.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_realtime/retrov17_01_realtime.xml
+
+#retrostreams
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream2/retrov17_01_stream2.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream2/retrov17_01_stream2.xml
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream3/retrov17_01_stream3.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream3/retrov17_01_stream3.xml
+
+
+#Experiment monitoring script
+
+MAILTO="catherine.thomas@noaa.gov"
+#0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_realtime >/dev/null
+#0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_stream2 >/dev/null
+#0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_stream3 >/dev/null
+
+
+##############
+# CI Testing  
+################
+MAILTO="david.huber@noaa.gov"
+#################### test ####################
+
+
+##### Sending ocean data to current production (Dogwood) from current dev (Cactus) 11/20/25 - Nick Esposito
+MAILTO="nicholas.esposito@noaa.gov"
+# For a range of dates:
+#53 14 04 12 * /opt/pbs/bin/qsub -v year=2024,month=02,start_day=14,end_day=29 < /u/emc.global/transfer_input.sh
+
+#Move yesterday's data vi scp. Replaced by rsync script below.
+#00 16 * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` <  /u/emc.global/transfer_input_1day.sh
+
+# rsync script examples
+#10 17 * * * /opt/pbs/bin/qsub -v year=2024,month=04,start_day=01,end_day=30 <  /u/emc.global/transfer_input_rsync.sh
+#11 17 * * * /opt/pbs/bin/qsub -v year=2024,month=02,start_day=29,end_day=29 <  /u/emc.global/transfer_input_1day_rsync.sh
+
+# rsync ocean data every 15 minutes
+#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` < /u/emc.global/transfer_input_rsync.sh
+#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "today" +\%Y`,month=`date -d "today" +\%m`,start_day=`date -d "today" +\%d`,end_day=`date -d "today" +\%d` < /u/emc.global/transfer_input_rsync.sh
