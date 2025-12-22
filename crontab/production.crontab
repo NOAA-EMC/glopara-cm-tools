@@ -11,12 +11,6 @@ MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov
 #################### test ####################
 
 ############################################################################
-# ROCOTO 4 CI
-######################
-# DISABLED; all CI tests should be run manually on WCOSS2
-#*/5 * * * * /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.sh > /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.log 2>&1
-
-############################################################################
 # Data syncs - syndat & verif
 ######################
 0 22 * * * /lfs/h2/emc/global/noscrub/emc.global/scripts/DATA/submit_sync_data.sh > /lfs/h2/emc/stmp/emc.global/submit_sync_data.log 2>&1
@@ -37,29 +31,6 @@ MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov
 ######################
 # Main dump
 45 * * * * /lfs/h2/emc/global/noscrub/emc.global/dump_archive/MONITOR/monitor_filecounts.sh > /lfs/h2/emc/stmp/emc.global/gda/logs/monitor_filecounts.log 2>&1
-
-############################################################################
-#### CI SYSTEM ####
-# SHELL=/bin/bash -l
-# MAILTO="walter.kolczynski@noaa.gov"
-# ci_home=/lfs/h2/emc/global/save/emc.global/CI_HOME/ci/scripts
-# ci_root=/lfs/h2/emc/global/noscrub/emc.global/GFS_CI_ROOT
-# d_cmd=date +%Y-%m-%d-%H:%M
-# */4 * * * * d=$($d_cmd); ${ci_home}/run_ci.sh >& ${ci_root}/ci_logs/run_ci_${d}.log || echo "ERROR in run_ci"
-# */7 * * * * d=$($d_cmd); ${ci_home}/check_ci.sh >& ${ci_root}/ci_logs/check_ci_${d}.log || echo "ERROR in check_ci"
-
-############################################################################
-
-
-##############
-# GFS Retro Tests
-################
-MAILTO="jessica.meixner@noaa.gov,catherine.thomas@noaa.gov,ruiyu.sun@noaa.gov"
-
-*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_realtime/rt17_upd03_realtime.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_realtime/rt17_upd03_realtime.xml
-
-#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream2/rt17_upd03_stream2.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream2/rt17_upd03_stream2.xml
-#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream3/rt17_upd03_stream3.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/rt17_upd03_stream3/rt17_upd03_stream3.xml
 
 #################
 # GFSv17 Retros #
