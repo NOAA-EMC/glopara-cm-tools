@@ -1,11 +1,14 @@
-#######################
-#SHELL=/bin/bash -l
+########################
+## EMC.GLOBAL CRONTAB ##
+########################
+SHELL=/bin/bash -l
 
 ############################################################################
-# ROCOTO 4 CI
-######################
-# DISABLED; all CI should be run manually on WCOSS2
-#*/5 * * * * /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.sh > /lfs/h2/emc/global/noscrub/emc.global/ci/run_rocoto.log 2>&1
+# RETRO CRONS
+############################################################################
+####NEEDS UPDATE MAILTO="kate.friedman@noaa.gov"
+MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov"
+#################### test ####################
 
 ############################################################################
 # Data syncs - syndat & verif
@@ -14,8 +17,9 @@
 
 ############################################################################
 #### GLOBAL DUMP ARCHIVE ####
-MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov,ashley.stanfield@noaa.gov"
+####NEEDS UPDATE MAILTO="kate.friedman@noaa.gov"
 
+#*/15 * * * * /lfs/h2/emc/global/noscrub/emc.global/scripts/GFS_VERSION/gfs_version.sh > /lfs/h2/emc/global/noscrub/emc.global/scripts/GFS_VERSION/gfs_version.log 2>&1
 
 ######################
 # Main GDA job
@@ -27,13 +31,27 @@ MAILTO="jessica.meixner@noaa.gov,david.huber@noaa.gov,nicholas.esposito@noaa.gov
 ######################
 # Main dump
 45 * * * * /lfs/h2/emc/global/noscrub/emc.global/dump_archive/MONITOR/monitor_filecounts.sh > /lfs/h2/emc/stmp/emc.global/gda/logs/monitor_filecounts.log 2>&1
-###########################################################################
 
-#################################
-# GFSv17 Retro Test Experiements 
-#################################
-# POC: Jessica Meixner, Cathy Thomas and Ruiyu Sun
-#################### retrotestgfs01 ####################
-MAILTO="jessica.meixner@noaa.gov"
-#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.db -w /lfs/h2/emc/global/noscrub/emc.global/RETRO_GFSv17/expdir/retrotestgfs10/retrotestgfs10.xml
-#################################################################
+#################
+# GFSv17 Retros #
+#################
+MAILTO="jessica.meixner@noaa.gov,catherine.thomas@noaa.gov,ruiyu.sun@noaa.gov,jiande.wang@noaa.gov,christian.boyer@noaa.gov,jiande.wang@noaa.gov"
+
+#realtime
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_realtime/retrov17_01_realtime.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_realtime/retrov17_01_realtime.xml
+
+#retrostreams
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream2/retrov17_01_stream2.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream2/retrov17_01_stream2.xml
+#*/5 * * * * /apps/ops/test/nco/core/rocoto.v1.3.5/bin/rocotorun -d /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream3/retrov17_01_stream3.db -w /lfs/h2/emc/gfstemp/emc.global/expdir/retrov17_01_stream3/retrov17_01_stream3.xml
+
+
+#Experiment monitoring script
+
+MAILTO="catherine.thomas@noaa.gov"
+#0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_realtime >/dev/null
+#0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_stream2 >/dev/null
+#0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_stream3 >/dev/null
+
+# Check for production version of the GFS
+MAILTO="nicholas.esposito@noaa.gov,david.huber@noaa.gov,ashley.stanfield@noaa.gov"
+0 */12 * * * ls -d /lfs/h1/ops/prod/packages/gfs.*

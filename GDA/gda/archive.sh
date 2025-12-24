@@ -104,6 +104,7 @@ if [[ ${do_mail:-NO} == "YES" ]]; then
   export maillist=${maillist:-"david.huber@noaa.gov"}
   # Create a log file
   export mailfile=/tmp/gda_dump_archive_mailfile.$$
+  echo "GDA Dump Archive job started at `date`" > $mailfile
 fi
 
 #export HOMEgda=${HOMEgda:-"/lfs/h2/emc/global/noscrub/emc.global/dump_archive"}
