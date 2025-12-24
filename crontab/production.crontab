@@ -52,26 +52,6 @@ MAILTO="catherine.thomas@noaa.gov"
 #0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_stream2 >/dev/null
 #0 */12 * * * /lfs/h2/emc/gfstemp/emc.global/scripts/stat_exp.sh retrov17_01_stream3 >/dev/null
 
-
-##############
-# CI Testing  
-################
-MAILTO="david.huber@noaa.gov"
-#################### test ####################
-
-
-##### Sending ocean data to current production (Dogwood) from current dev (Cactus) 11/20/25 - Nick Esposito
-MAILTO="nicholas.esposito@noaa.gov"
-# For a range of dates:
-#53 14 04 12 * /opt/pbs/bin/qsub -v year=2024,month=02,start_day=14,end_day=29 < /u/emc.global/transfer_input.sh
-
-#Move yesterday's data vi scp. Replaced by rsync script below.
-#00 16 * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` <  /u/emc.global/transfer_input_1day.sh
-
-# rsync script examples
-#10 17 * * * /opt/pbs/bin/qsub -v year=2024,month=04,start_day=01,end_day=30 <  /u/emc.global/transfer_input_rsync.sh
-#11 17 * * * /opt/pbs/bin/qsub -v year=2024,month=02,start_day=29,end_day=29 <  /u/emc.global/transfer_input_1day_rsync.sh
-
-# rsync ocean data every 15 minutes
-#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` < /u/emc.global/transfer_input_rsync.sh
-#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "today" +\%Y`,month=`date -d "today" +\%m`,start_day=`date -d "today" +\%d`,end_day=`date -d "today" +\%d` < /u/emc.global/transfer_input_rsync.sh
+# Check for production version of the GFS
+MAILTO="nicholas.esposito@noaa.gov,david.huber@noaa.gov,ashley.stanfield@noaa.gov"
+0 */12 * * * ls -d /lfs/h1/ops/prod/packages/gfs.*
