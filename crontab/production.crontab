@@ -58,10 +58,10 @@ MAILTO="jessica.meixner@noaa.gov"
 MAILTO="nicholas.esposito@noaa.gov"
 
 # These move ocean data between the prod and dev machines using rsync on a real time basis
-*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` < /u/emc.global/transfer_rsync_oceantoocean_thismachine.sh
-*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "today" +\%Y`,month=`date -d "today" +\%m`,start_day=`date -d "today" +\%d`,end_day=`date -d "today" +\%d` < /u/emc.global/transfer_rsync_oceantoocean_thismachine.sh
-*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` < /u/emc.global/transfer_rsync_ocean_DtoC.sh
-*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "today" +\%Y`,month=`date -d "today" +\%m`,start_day=`date -d "today" +\%d`,end_day=`date -d "today" +\%d` < /u/emc.global/transfer_rsync_ocean_DtoC.sh
+#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` < /u/emc.global/transfer_rsync_oceantoocean_thismachine.sh
+#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "today" +\%Y`,month=`date -d "today" +\%m`,start_day=`date -d "today" +\%d`,end_day=`date -d "today" +\%d` < /u/emc.global/transfer_rsync_oceantoocean_thismachine.sh
+#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "yesterday" +\%Y`,month=`date -d "yesterday" +\%m`,start_day=`date -d "yesterday" +\%d`,end_day=`date -d "yesterday" +\%d` < /u/emc.global/transfer_rsync_ocean_DtoC.sh
+#*/15 * * * * /opt/pbs/bin/qsub -v year=`date -d "today" +\%Y`,month=`date -d "today" +\%m`,start_day=`date -d "today" +\%d`,end_day=`date -d "today" +\%d` < /u/emc.global/transfer_rsync_ocean_DtoC.sh
 
 # For Mindo, sent on 20251224
 #15 * * * * /opt/pbs/bin/qsub -v year=`date -d "today" +\%Y`,month=`date -d "today" +\%m`,start_day=`date -d "today" +\%d`,end_day=`date -d "today" +\%d` < /u/emc.global/transfer_rsync_Mindo.sh
