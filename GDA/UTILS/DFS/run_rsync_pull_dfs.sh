@@ -15,7 +15,7 @@ for config in $configs; do
 done
 
 # Initialize modules
-. $HOMEgda/UTIL/load_modules.sh
+. $HOMEgda/UTILS/load_modules.sh
 status=$?
 [[ $status -ne 0 ]] && exit $status
 

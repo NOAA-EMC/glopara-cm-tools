@@ -1,5 +1,5 @@
 help([[
-Load environment to run GFS on WCOSS2
+Load environment to run GDA on WCOSS2
 ]])
 
 load(pathJoin("PrgEnv-intel", os.getenv("PrgEnv_intel_ver")))
@@ -35,8 +35,7 @@ load(pathJoin("ncdiag", os.getenv("ncdiag_ver")))
 load(pathJoin("crtm", os.getenv("crtm_ver")))
 load(pathJoin("g2tmpl", os.getenv("g2tmpl_ver")))
 load(pathJoin("wgrib2", os.getenv("wgrib2_ver")))
-load(pathJoin("ncdiag", os.getenv("ncdiag_ver")))
 
 load(pathJoin("prepobs", os.getenv("prepobs_run_ver")))
 
-whatis("Description: GFS run environment")
+whatis("Description: GDA run environment")
