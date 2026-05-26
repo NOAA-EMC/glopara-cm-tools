@@ -80,14 +80,12 @@ export pgmerr=errfile
 # Wait until alert file exists
 
 if [[ $DALERT = YES ]]; then
-  #$HOMEgfs/ush/global_getdump.sh $CDATE $CDUMP $alertf
   $EXPDIR/global_getdump.sh $CDATE $CDUMP $alertf
   echo status=$?
   [[ $status -ne 0 ]] && exit $status
   until [[ -s $DATA/$CDUMP.$cyctz.$alertf ]];do
      if [[ $((nsleep+=1)) -gt $msleep ]];then exit 1;fi
      sleep $tsleep
-     #$HOMEgfs/ush/global_getdump.sh $CDATE $CDUMP dump_alert_flag.tm00
      $EXPDIR/global_getdump.sh $CDATE $CDUMP dump_alert_flag.tm00
      status=$?
      [[ $status -ne 0 ]] && exit $status
@@ -98,9 +96,7 @@ fi
 ################################################################################
 # Get dump files
 
-#$HOMEgfs/ush/global_getdump.sh $CDATE $CDUMP $COMOBSTMP $DFILES
 $EXPDIR/global_getdump.sh $CDATE $CDUMP $COMOBSTMP $DFILES
-#$HOMEgfs/ush/global_getdump.sh $CDATE $CDUMP $COMGFSTMP $DFILES_GFS
 $EXPDIR/global_getdump.sh $CDATE $CDUMP $COMGFSTMP $DFILES_GFS
 status=$?
 [[ $status -ne 0 ]] && exit $status

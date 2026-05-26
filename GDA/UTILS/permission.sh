@@ -11,8 +11,8 @@ set -a;. $CONFIG;set +a
 CHGRP_CMD="chgrp rstprod"
 DMPDIR=${DMPDIR:-"/lfs/h2/emc/dump/noscrub/dump"}
 
-source "$HOMEgfs/versions/run.ver"
-source "$HOMEgfs/versions/wcoss2.ver"
+source "$HOMEgda/versions/run.ver"
+source "$HOMEgda/versions/wcoss2.ver"
 
 export NDATE=${NDATE:-"/apps/ops/prod/nco/core/prod_util.v${prod_util_ver}/exec/ndate"}
 
