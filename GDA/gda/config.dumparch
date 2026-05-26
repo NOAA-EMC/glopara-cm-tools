@@ -46,7 +46,7 @@ source "$HOMEgda/versions/run.ver"
 source "$HOMEgda/versions/wcoss2.ver"
 
 # Set GFS version for COM path (major.minor only)
-export gfs_ver_com=${gfs_ver:-v16.3}
+export gfs_ver_com=${gfs_ver_com:-v16.3}
 
 # Set utilities
 export NDATE=${NDATE:-"/apps/ops/prod/nco/core/prod_util.v${prod_util_ver}/exec/ndate"}
