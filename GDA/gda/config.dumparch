@@ -33,7 +33,6 @@ export gfs_ver="v16.3.31"
 
 # Set GDA paths
 export DMPDIR="/lfs/h2/emc/dump/noscrub/dump"
-export HOMEgfs=${HOMEgfs:-"/lfs/h1/ops/prod/packages/gfs.${gfs_ver}"}
 export HOMEgda=${HOMEgda:-"/lfs/h2/emc/global/noscrub/emc.global/dump_archive"}
 export EXPDIR=${EXPDIR:-${HOMEgda}/gda}
 export DUMPSH=$EXPDIR/dump.sh
@@ -45,8 +44,8 @@ export WEBDIR=/home/www/emc/htdocs/gmb/emc.glopara/DUMP/monitor_wcoss2
 # DFS paths
 
 # Source versions file for runtime
-source "$HOMEgfs/versions/run.ver"
-source "$HOMEgfs/versions/wcoss2.ver"
+source "$HOMEgda/versions/run.ver"
+source "$HOMEgda/versions/wcoss2.ver"
 
 # Set GFS version for COM path
 export gfs_ver_com=$( echo "$gfs_ver" | cut -c1-5)

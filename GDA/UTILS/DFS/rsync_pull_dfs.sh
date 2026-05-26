@@ -58,12 +58,12 @@ for config in $configs; do
 done
 
 # Initialize modules
-. $HOMEgfs/ush/load_fv3gfs_modules.sh
+. $HOMEgda/UTIL/load_modules.sh
 status=$?
 [[ $status -ne 0 ]] && exit $status
 
 # Source versions file for runtime
-source "$HOMEgfs/versions/run.ver"
+source "$HOMEgda/versions/run.ver"
 
 export NDATE=${NDATE:-"/apps/ops/prod/nco/core/prod_util.v${prod_util_ver}/exec/ndate"}
 

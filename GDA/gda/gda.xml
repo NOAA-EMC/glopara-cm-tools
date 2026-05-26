@@ -9,7 +9,6 @@
   <!ENTITY PSLOT "gda">
   <!ENTITY HOMEgda "/lfs/h2/emc/global/noscrub/emc.global/dump_archive">
   <!ENTITY HOMEgdaUTILS "&HOMEgda;/UTILS">
-  <!ENTITY HOMEgfs "/lfs/h1/ops/prod/packages/gfs.&gfs_ver;">
   <!ENTITY EXPDIR "&HOMEgda;/&PSLOT;">
   <!ENTITY COM "/lfs/h2/emc/ptmp/emc.global/gda">
   <!ENTITY COMGFS "/lfs/h1/ops/prod/com/gfs/&gfs_ver_com;">
@@ -58,7 +57,6 @@
         <envar><name>job</name><value>dump_archive_gfs_<cyclestr>@H</cyclestr></value></envar>
         <envar><name>DATA</name><value>&DATAROOT;/dump_archive_gfs_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
         <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
-        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
         
         <dependency>
           <and>
@@ -91,7 +89,6 @@
         <envar><name>job</name><value>dump_archive_gdas_<cyclestr>@H</cyclestr></value></envar>
         <envar><name>DATA</name><value>&DATAROOT;/dump_archive_gdas_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
         <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
-        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
         
         <dependency>
           <and>
@@ -124,7 +121,6 @@
         <envar><name>job</name><value>dump_archive_amsr2x_<cyclestr>@H</cyclestr></value></envar>
         <envar><name>DATA</name><value>&DATAROOT;/dump_archive_amsr2x_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
         <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
-        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
 
         <dependency>
           <taskdep task="gda.gdas"/>
@@ -151,7 +147,6 @@
         <envar><name>job</name><value>dump_archive_rtofs_<cyclestr>@H</cyclestr></value></envar>
         <envar><name>DATA</name><value>&DATAROOT;/dump_archive_rtofs_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
         <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
-        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
 
         <dependency>
           <and>
@@ -182,7 +177,6 @@
         <envar><name>job</name><value>dump_archive_rsync_<cyclestr>@H</cyclestr></value></envar>
         <envar><name>DATA</name><value>&DATAROOT;/dump_archive_rsync_<cyclestr>@Y@m@d@H</cyclestr></value></envar>
         <envar><name>HOMEgda</name><value>&HOMEgda;</value></envar>
-        <envar><name>HOMEgfs</name><value>&HOMEgfs;</value></envar>
         <envar><name>NFREQ</name><value>24</value></envar>
         
         <dependency>
