@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE workflow [
 
-  <!ENTITY gfs_ver "v16.3.31">
   <!ENTITY gfs_ver_com "v16.3">
   <!ENTITY obsproc_ver "v1.2">
   <!ENTITY rtofs_ver "v2.5">
