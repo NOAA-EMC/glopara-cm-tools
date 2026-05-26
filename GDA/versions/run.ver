@@ -1,4 +1,6 @@
 export version=${version:-v1.0}
+# Major and minor versions for the GFS only (COM)
+export gfs_version=${gfs_version:-v16.3}
 export nam_ver=v4.2
 export rtofs_ver=v2.5
 export radarl2_ver=v1.2
