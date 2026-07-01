@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE workflow [
 
-  <!ENTITY gfs_ver "v16.3.31">
+  <!ENTITY gfs_ver "v16.3.32">
   <!ENTITY gfs_ver_com "v16.3">
   <!ENTITY obsproc_ver "v1.2">
   <!ENTITY rtofs_ver "v2.5">
@@ -31,12 +31,12 @@
 <workflow realtime="F" cyclethrottle="&CYCLE_THROTTLE;" scheduler="&SCHEDULER;" taskthrottle="&TASK_THROTTLE;">
 
   <log><cyclestr>&EXPDIR;/logs/@Y@m@d@H.log</cyclestr></log>
-  <cycledef group="gfs">202306180000 202701010000 06:00:00</cycledef>
-  <cycledef group="gdas">202306180000 202701010000 06:00:00</cycledef>
-  <cycledef group="rtofs">202306181200 202701011200 24:00:00</cycledef>
-  <cycledef group="rsync">202306181200 202701011200 06:00:00</cycledef>
-  <cycledef group="arch">202306181800 202701011800 24:00:00</cycledef>
-  <cycledef>202306200000 202701011800 06:00:00</cycledef>
+  <cycledef group="gfs">202603240000 202801010000 06:00:00</cycledef>
+  <cycledef group="gdas">202603240000 202801010000 06:00:00</cycledef>
+  <cycledef group="rtofs">202603241200 202801011200 24:00:00</cycledef>
+  <cycledef group="rsync">202603241200 202801011200 06:00:00</cycledef>
+  <cycledef group="arch">202603241800 202801011800 24:00:00</cycledef>
+  <cycledef>202603240000 202801011800 06:00:00</cycledef>
 
   <task name="gda.gfs" maxtries="2" cycledefs="gfs">
         <command>sh -c '$EXPDIR/dump.sh'</command>
