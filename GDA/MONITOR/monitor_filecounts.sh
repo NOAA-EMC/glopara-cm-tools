@@ -14,8 +14,8 @@ CONFIG=/lfs/h2/emc/global/noscrub/emc.global/dump_archive/gda/config.dumparch
 set -a;. $CONFIG;set +a
 
 # Source versions file for runtime
-source "$HOMEgfs/versions/run.ver"
-source "$HOMEgfs/versions/wcoss2.ver"
+source "$HOMEgda/versions/run.ver"
+source "$HOMEgda/versions/wcoss2.ver"
 
 NDATE=${NDATE:-"/apps/ops/prod/nco/core/prod_util.v${prod_util_ver}/exec/ndate"}
 

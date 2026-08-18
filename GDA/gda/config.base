@@ -46,10 +46,6 @@ export KEEPDATA="NO"
 export CHGRP_RSTPROD="YES"
 export CHGRP_CMD="chgrp rstprod"
 
-# Machine environment, jobs, and other utility scripts
-export BASE_ENV="$HOMEgfs/env"
-export BASE_JOB="$HOMEgfs/jobs/rocoto"
-
 # EXPERIMENT specific environment parameters
 export SDATE=${SDATE:-2022052500}
 export FDATE=2022052506
