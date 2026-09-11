@@ -106,13 +106,13 @@ rsync -av role.glopara@dtn-ursa.fairmont.rdhpcs.noaa.gov:/scratch3/NCEPDEV/globa
 # Sync GDA data from Ursa
 #############################
 # The GDA is quite large, so we will only sync the past X days of data.
-for i in {0..${num_days}}; do
+for i in $(seq 0 $((num_days - 1))); do
     day=$(date -d "${today} - ${i} days" +%Y%m%d)
     echo "Syncing GDA data for ${day}"
     # Sync gdas, gdasx, gdasy, gdasnr, gfs, gfsx, gfsy, gfsnr, and rtofs
     # gdas, gdasnr, gfs, gfsnr, and rtofs should always be present, so raise an error if rsync fails.
     for RUN in gdas gdasnr gfs gfsnr rtofs; do
-        rsync -av ${ursa_dtn}:${ursa_glopara_root}/dump/${RUN}.${day} ${gda_root}/
+        rsync -av "${dry_run}" ${ursa_dtn}:${ursa_glopara_root}/dump/${RUN}.${day} ${gda_root}/
         if [[ $? -ne 0 ]]; then
             echo "Error: rsync failed for ${RUN}.${day}"
             exit 1
@@ -120,6 +120,11 @@ for i in {0..${num_days}}; do
     done
     # gdasx, gdasy, gfsx, and gfsy may not be
     for RUN in gdasx gdasy gfsx gfsy; do
+        # Check for existence of the file on Ursa before attempting to rsync
+        rsync --list-only ${ursa_dtn}:${ursa_glopara_root}/dump/${RUN}.${day} >/dev/null 2>&1
+        if [[ $? -ne 0 ]]; then
+            continue
+        fi
         rsync -av "${dry_run}" ${ursa_dtn}:${ursa_glopara_root}/dump/${RUN}.${day} ${gda_root}/
         if [[ $? -ne 0 ]]; then
             echo "Warning: rsync failed for ${RUN}.${day}, continuing"
