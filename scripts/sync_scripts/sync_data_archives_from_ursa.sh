@@ -12,7 +12,8 @@
 #   -g: sync only GDA data
 #   -f: sync only fix (static) data
 #   -h: display the help message
-#   -D: enable debug mode (will run rsync with --dry-run)
+#   -V: enable verbose mode (will run this script with set -x)
+#   -D: enable debug mode (will run rsync with --dry-run, implies -V)
 # It will then sync data from Ursa starting on the specified date and going
 # back the specified number of days.
 ############################
@@ -90,6 +91,10 @@ for arg in "$@"; do
     -h)
         usage
         ;;
+    -V)
+        set -x
+        shift
+        ;;
     -D)
         set -x
         debug=1
@@ -159,7 +164,7 @@ gda_root=${gda_root:-${glopara_root}/dump}
 if [[ ${sync_syndat} -eq 1 ]]; then
     echo "Syncing syndat data from Ursa"
     cd ${glopara_root}/com
-    rsync -av "${dry_run}" ${ursa_dtn}:${ursa_glopara_root}/com/gfs/prod/syndat .
+    rsync -av ${dry_run} ${ursa_dtn}:${ursa_glopara_root}/com/gfs/prod/syndat .
 fi
 
 ############################
@@ -172,7 +177,7 @@ if [[ ${sync_verif} -eq 1 ]]; then
     cd ${glopara_root}/data
     # Run these in parallel to speed up the sync process.
     for dir in archive cartopy obdata obs_data prepbufr; do
-        rsync -av "${dry_run}" ${ursa_dtn}:${ursa_glopara_root}/data/metplus.data/${dir} ${dir} >& ~/rsync_${dir}.log &
+        rsync -av ${dry_run} ${ursa_dtn}:${ursa_glopara_root}/data/metplus.data/${dir} ${dir} >& ~/rsync_${dir}.log &
         job_pids+=($!)
         job_names+=(${dir})
         sleep 1s
@@ -201,8 +206,8 @@ if [[ ${sync_fix} -eq 1 ]]; then
     job_names=()
     cd ${glopara_root}/fix
     # Run these in parallel to speed up the sync process.
-    for dir in aer am archive_fix_batch.log  chem cice cpl crtm datm gdas gldas glwu gsi lut mom6 orog raw reg2grb2 sfc_climo ugwd verif wave; do
-        rsync -av "${dry_run}" ${ursa_dtn}:${ursa_glopara_root}/fix/${dir} ${dir} >& ~/rsync_${dir}.log &
+    for dir in aer am chem cice cpl crtm datm gdas gldas glwu gsi lut mom6 orog raw reg2grb2 sfc_climo ugwd verif wave; do
+        rsync -av ${dry_run} ${ursa_dtn}:${ursa_glopara_root}/fix/${dir} ${dir} >& ~/rsync_${dir}.log &
         job_pids+=($!)
         job_names+=(${dir})
         sleep 1s
@@ -240,7 +245,7 @@ if [[ ${sync_gda} -eq 1 ]]; then
             if [[ $? -ne 0 ]]; then
                 continue
             fi
-            rsync -av "${dry_run}" ${ursa_dtn}:${ursa_glopara_root}/dump/${RUN}.${day} ${gda_root}/
+            rsync -av ${dry_run} ${ursa_dtn}:${ursa_glopara_root}/dump/${RUN}.${day} ${gda_root}/
             if [[ $? -ne 0 ]]; then
                 for warn in ${warn_run}; do
                     if [[ ${RUN} == ${warn} ]]; then
