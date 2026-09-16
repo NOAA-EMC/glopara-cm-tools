@@ -193,6 +193,8 @@ if [[ ${sync_verif} -eq 1 ]]; then
             echo "Error: rsync failed for the ${job_names[$i]} directory"
             exit 1
         fi
+        # On success, delete the log file.
+        rm ~/rsync_${job_names[$i]}.log
         i=$((i + 1)) || true
     done
 fi
@@ -223,6 +225,8 @@ if [[ ${sync_fix} -eq 1 ]]; then
             echo "Error: rsync failed for the ${job_names[$i]} directory"
             exit 1
         fi
+        # On success, delete the log file.
+        rm ~/rsync_${job_names[$i]}.log
         i=$((i + 1)) || true
     done
 fi
