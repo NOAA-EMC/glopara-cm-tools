@@ -87,7 +87,7 @@ send_email () {
 export COMPONENT="atmos"
 com_gfs_ver=${com_gfs_ver:-${gfs_version:-v16.3}}
 export COMGFSTMP=${COMGFSTMP:-${COMROOT}/gfs/${com_gfs_ver}/$CDUMP.\$day/$CDUMP.\$cyctz/${COMPONENT}/${CDUMP}.\$cyctz}
-export COMOBSTMP=${COMOBSTMP:-${COMROOT}/obsproc/v1.1/$CDUMP.\$day/$CDUMP.\$cyctz/${COMPONENT}/${CDUMP}.\$cyctz}
+export COMOBSTMP=${COMOBSTMP:-${COMROOT}/obsproc/v1.3/$CDUMP.\$day/$CDUMP.\$cyctz/${COMPONENT}/${CDUMP}.\$cyctz}
 export COMGFSPRE=${COMGFSPRE:-$CDUMP.\$cyctz}
 export COMOUT=${COMOUT:-$(pwd)}
 export NCP=${DMPCPCMD:-${NCP:-cp}}
