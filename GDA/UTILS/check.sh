@@ -5,8 +5,8 @@ CDUMP=$1
 CDATE=$2
 
 GDADIR=/lfs/h2/emc/global/noscrub/emc.global/dump
-OPSDIR=/lfs/h1/ops/prod/com/obsproc/v1.0
-GFSDIR=/lfs/h1/ops/prod/com/gfs/v16.2
+OPSDIR=/lfs/h1/ops/prod/com/obsproc/v1.3
+GFSDIR=/lfs/h1/ops/prod/com/gfs/v16.3
 
 echo "Check $CDUMP $CDATE"
 

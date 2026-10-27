@@ -2,7 +2,7 @@
 <!DOCTYPE workflow [
 
   <!ENTITY gfs_ver_com "v16.3">
-  <!ENTITY obsproc_ver "v1.2">
+  <!ENTITY obsproc_ver "v1.3">
   <!ENTITY rtofs_ver "v2.5">
 
   <!ENTITY PSLOT "gda">

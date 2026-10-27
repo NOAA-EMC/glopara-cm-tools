@@ -5,7 +5,7 @@ CDATE=$1
 EDATE=${2:-$CDATE}
 
 GDADIR="/lfs/h2/emc/dump/noscrub/dump"
-OPSDIR="/lfs/h1/ops/prod/com/obsproc/v1.2"
+OPSDIR="/lfs/h1/ops/prod/com/obsproc/v1.3"
 GFSDIR="/lfs/h1/ops/prod/com/gfs/v16.3"
 
 module load prod_util
