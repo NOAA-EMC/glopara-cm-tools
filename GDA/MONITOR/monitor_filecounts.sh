@@ -202,7 +202,7 @@ do
             elif [ ${day}${cycle} -ge 2024052500 ]; then
 	      wcn=73 # Add uprair 
             elif [ ${day}${cycle} -ge 2024052212 ]; then
-	      wcn=72 # Retire saphir and sevcsr with obsproc/v1.2
+	      wcn=72 # Retire saphir and sevcsr with obsproc/v1.3
             elif [ ${day}${cycle} -ge 20231008 ]; then
 	      wcn=74 # Add ASCII IMS (gdas only)
             elif [ ${day}${cycle} -ge 2023072518 ]; then
@@ -236,7 +236,7 @@ do
 	  gdasnr)
 	    wcn=6
             if [ ${day}${cycle} -ge 2024052212 ]; then
-	      wcn=6 # Retire saphir and sevcsr with obsproc/v1.2
+	      wcn=6 # Retire saphir and sevcsr with obsproc/v1.3
             elif [ ${day}${cycle} -ge 2021041412 ]; then
 	      wcn=7
             fi
@@ -351,7 +351,7 @@ do
             elif [ ${day}${cycle} -ge 2024052500 ]; then
 	      wcn=72 # Add uprair 
             elif [ ${day}${cycle} -ge 2024052212 ]; then
-	      wcn=71 # Retire saphir and sevcsr with obsproc/v1.2
+	      wcn=71 # Retire saphir and sevcsr with obsproc/v1.3
             elif [ ${day}${cycle} -ge 2023072518 ]; then
               wcn=73 # GFSv16.3 (gmi1cr, saldrn, subpfl) + snocvr + AMSR-2
             elif [ ${day}${cycle} -ge 2022120112 ]; then
@@ -381,7 +381,7 @@ do
 	  gfsnr)
 	    wcn=6
             if [ ${day}${cycle} -ge 2024052212 ]; then
-	      wcn=6 # Retire saphir and sevcsr with obsproc/v1.2
+	      wcn=6 # Retire saphir and sevcsr with obsproc/v1.3
             elif [ ${day}${cycle} -ge 2021041412 ]; then
               wcn=7
             fi

@@ -4,7 +4,7 @@ CDATE=$1
 CDUMP=$2
 DMPDIR=${3:-/lfs/h2/emc/dump/noscrub/dump}
 OPSGFSDIR=${4:-/lfs/h1/ops/prod/com/gfs/v16.3}
-OPSOBSDIR=${5:-/lfs/h1/ops/prod/com/obsproc/v1.1}
+OPSOBSDIR=${5:-/lfs/h1/ops/prod/com/obsproc/v1.3}
 
 PDY=`expr $CDATE | cut -c1-8`
 cyc=`expr $CDATE | cut -c9-10`
