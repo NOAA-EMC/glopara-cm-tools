@@ -195,7 +195,9 @@ do
 
 	case $n in
 	  gdas)
-            if [ ${day}${cycle} -ge 2025032600 ]; then
+            if [ ${day}${cycle} -ge 2026102612 ]; then
+              wcn=70 # obsproc v1.3: add amsr, msro, msmws & remove 1bhrs4, airserv, avcspm, eshrs3, geoimr, omi, osbuv8
+            elif [ ${day}${cycle} -ge 2025032600 ]; then
 	      wcn=74 # Add AFWA global snow.usaf.grib2 
             elif [ ${day}${cycle} -ge 2024052500 ]; then
 	      wcn=73 # Add uprair 
@@ -340,7 +342,9 @@ do
             np="y"
 	  ;;
 	  gfs)
-            if [ ${day}${cycle} -ge 2025042200 ]; then
+            if [ ${day}${cycle} -ge 2026102612 ]; then
+              wcn=70 # obsproc v1.3: add amsr, msro, msmws & remove 1bhrs4, airserv, avcspm, eshrs3, geoimr, omi, osbuv8
+            elif [ ${day}${cycle} -ge 2025042200 ]; then
 	      wcn=74 # Add IMS to gfs as well
             elif [ ${day}${cycle} -ge 2025032600 ]; then
 	      wcn=73 # Add AFWA global snow.usaf.grib2 
